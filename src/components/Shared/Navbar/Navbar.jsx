@@ -19,6 +19,7 @@ const Navbar = () => {
       })
   }
 
+  // For menu
   const menu = <>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/blog'>Blog</Link></li>
@@ -30,7 +31,7 @@ const Navbar = () => {
     }
   </>
 
-
+  // Function for toggle dark and light theme
   const toggleTheme = (event) => {
     const toggler = event.target.checked;
 

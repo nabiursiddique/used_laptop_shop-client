@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 const SignIn = () => {
     const { register, handleSubmit, formState: { errors },reset } = useForm();
     const {signIn}=useContext(AuthContext);
-    const [loginError, setLoginError] =useState('')
+    const [loginError, setLoginError] =useState('');
 
     const handleSignIn = (data) => {
         // Sign in with email and password

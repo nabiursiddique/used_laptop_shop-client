@@ -6,19 +6,38 @@ import { AuthContext } from '../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors },reset } = useForm();
-    const {createUser} = useContext(AuthContext)
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { createUser, googleSignIn } = useContext(AuthContext);
+
+
     const handleSignIn = (data) => {
         // creating user with email and password
         createUser(data.email, data.password)
-        .then(result =>{
-            const user = result.user;
-            toast.success("Account created successfully");
-        })
-        .catch(err => console.error(err.message));
+            .then(result => {
+                const user = result.user;
+                if (user) {
+                    toast.success("Account created successfully");
+                }
+            })
+            .catch(err => console.error(err.message));
 
         reset();
     }
+
+
+    const google = () => {
+        googleSignIn(googleProvider)
+            .then(result => {
+                const user = result.user;
+                if (user) {
+                    toast.success("Login successful");
+                }
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
+
     return (
         <div className='h-auto flex justify-center items-center'>
             <div className='w-96 p-7 my-7 shadow-lg border border-white rounded-lg'>
@@ -57,8 +76,10 @@ const SignUp = () => {
                             required: "Password is required.",
                             maxLength: 20,
                             minLength: { value: 6, message: "Password must be at least 6 characters." },
-                            pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, 
-                                       message: 'Password must be strong.' }
+                            pattern: {
+                                value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                                message: 'Password must be strong.'
+                            }
                         })} type="password" placeholder="Your Password" className="input input-bordered w-full" />
                         {errors.password && <p className='text-sm mt-2 text-red-500'>{errors.password?.message}</p>}
                         <label className="label"><span className="label-text">Forget Password?</span></label>
@@ -67,7 +88,7 @@ const SignUp = () => {
                 </form>
                 <p className='text-sm text-center'>Already have an account? <Link className='text-blue-400' to='/signIn'>Sign In</Link> </p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'><span className='text-blue-400 text-xl'><FaGoogle /></span>GOOGLE</button>
+                <button onClick={google} className='btn btn-outline w-full'><span className='text-blue-400 text-xl'><FaGoogle /></span>GOOGLE</button>
             </div>
         </div>
     );
