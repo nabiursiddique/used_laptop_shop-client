@@ -7,11 +7,11 @@ import { toast } from 'react-hot-toast';
 
 const SignIn = () => {
     const { register, handleSubmit, formState: { errors },reset } = useForm();
-    const {signIn}=useContext(AuthContext);
+    const {signIn, googleSignIn}=useContext(AuthContext);
     const [loginError, setLoginError] =useState('');
 
+    // Sign in with email and password
     const handleSignIn = (data) => {
-        // Sign in with email and password
         setLoginError('');
         signIn(data.email, data.password)
         .then(result =>{
@@ -24,8 +24,20 @@ const SignIn = () => {
             const errorMessage = error.message;
             setLoginError(errorMessage);
         })
-
         reset();
+    }
+
+    // Sign in with google
+    const google =()=>{
+        googleSignIn()
+        .then(result =>{
+            const user = result.user;
+            const name =user.displayName;
+            toast.success(`${name} logged in successfully.`);
+        })
+        .catch(error =>{
+            console.error(error);
+        })
     }
 
     return (
@@ -58,7 +70,7 @@ const SignIn = () => {
                 </form>
                 <p className='text-sm text-center'>New to <span className='text-blue-500'>AAA</span> Technology? <Link className='text-blue-400' to='/signUP'>Sign Up</Link> </p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'><span className='text-blue-400 text-xl'><FaGoogle /></span>GOOGLE</button>
+                <button onClick={google} className='btn btn-outline w-full'><span className='text-blue-400 text-xl'><FaGoogle /></span>GOOGLE</button>
             </div>
         </div>
     );

@@ -26,12 +26,11 @@ const SignUp = () => {
 
 
     const google = () => {
-        googleSignIn(googleProvider)
+        googleSignIn()
             .then(result => {
                 const user = result.user;
-                if (user) {
-                    toast.success("Login successful");
-                }
+                const name = user.displayName;
+                toast.success(`${name} logged in successfully.`);
             })
             .catch(error => {
                 console.log(error.message);
