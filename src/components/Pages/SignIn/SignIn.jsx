@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
+import { AuthContext } from '../../../Contexts/AuthProvider';
 
 const SignIn = () => {
     const { register, handleSubmit, formState: { errors },reset } = useForm();
+    const {signIn}=useContext(AuthContext);
+
     const handleSignIn = (data) => {
-        console.log(data);
+        signIn(data.email, data.password)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(err => console.error(err))
+
         reset();
     }
+
     return (
         <div className='h-auto flex justify-center items-center'>
             <div className='w-96 p-7 my-7 shadow-lg border border-white rounded-lg'>
