@@ -26,7 +26,7 @@ const Blog = () => {
                 {
                     blogContents.map((blogContent,ind) => <div key={ind} className="join join-vertical w-full">
                     <div className="collapse collapse-arrow join-item border border-base-300">
-                        <input type="radio" name="my-accordion-4" checked="checked" />
+                        <input type="radio" name="my-accordion-1"/>
                         <div className="collapse-title text-xl  bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-medium">
                             {blogContent.question}
                         </div>

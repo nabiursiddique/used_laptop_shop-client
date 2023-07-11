@@ -48,7 +48,7 @@ const Slider = () => {
 
     ]
     return (
-        <div className='m-3'>
+        <div>
             <div className="carousel w-full lg:h-screen sm:h-auto rounded-lg shadow-2xl">
                 {
                     laptopImages.map(laptopImage =>
