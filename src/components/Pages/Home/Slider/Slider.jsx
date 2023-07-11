@@ -51,8 +51,8 @@ const Slider = () => {
         <div>
             <div className="carousel w-full lg:h-screen sm:h-auto rounded-lg shadow-2xl">
                 {
-                    laptopImages.map(laptopImage =>
-                        <div id={`slide${laptopImage.id}`} className="carousel-item relative w-full sliderImage">
+                    laptopImages.map((laptopImage, ind) =>
+                        <div key={ind} id={`slide${laptopImage.id}`} className="carousel-item relative w-full sliderImage">
                             <img src={laptopImage.image} className="w-full" />
                             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 z-20">
                                 <a href={`#slide${laptopImage.prev}`} className="btn btn-circle">❮</a>

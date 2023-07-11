@@ -7,6 +7,7 @@ const Navbar = () => {
   const menu = <>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/blog'>Blog</Link></li>
+    <li><Link to='/signIn'>Sign In</Link></li>
   </>
 
   const toggleTheme = (event) => {
