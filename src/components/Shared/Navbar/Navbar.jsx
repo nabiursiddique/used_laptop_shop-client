@@ -39,7 +39,7 @@ const Navbar = () => {
             {menu}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-2xl bg-gradient-to-r from-sky-700  to-sky-400 text-transparent bg-clip-text">AAATechnology</a>
+        <a className="btn btn-ghost normal-case text-2xl bg-gradient-to-r from-sky-700  to-sky-400 text-transparent bg-clip-text">AAA Technology</a>
       </div>
 
       <div className="navbar-end ">
