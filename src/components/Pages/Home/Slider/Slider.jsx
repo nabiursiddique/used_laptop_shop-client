@@ -49,7 +49,7 @@ const Slider = () => {
     ]
     return (
         <div className='m-3'>
-            <div className="carousel w-full lg:h-screen sm:h-auto rounded-lg shadow-2xl ">
+            <div className="carousel w-full lg:h-screen sm:h-auto rounded-lg shadow-2xl">
                 {
                     laptopImages.map(laptopImage =>
                         <div id={`slide${laptopImage.id}`} className="carousel-item relative w-full sliderImage">
