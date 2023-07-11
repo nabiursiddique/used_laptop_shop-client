@@ -1,14 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || "lemonade");
+  const { user, logOut } = useContext(AuthContext);
+
+  // For logout
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logout Successful")
+      })
+      .catch((error) => {
+        console.error(error.message);
+        toast.error("Logout not successful")
+      })
+  }
 
   const menu = <>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/blog'>Blog</Link></li>
-    <li><Link to='/signIn'>Sign In</Link></li>
+    {
+      user?.uid ?
+        <li onClick={handleLogOut}><Link to='/signIn'>Sign Out</Link></li>
+        :
+        <li><Link to='/signIn'>Sign In</Link></li>
+    }
   </>
+
 
   const toggleTheme = (event) => {
     const toggler = event.target.checked;

@@ -1,20 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../Contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const SignIn = () => {
     const { register, handleSubmit, formState: { errors },reset } = useForm();
     const {signIn}=useContext(AuthContext);
+    const [loginError, setLoginError] =useState('')
 
     const handleSignIn = (data) => {
+        // Sign in with email and password
+        setLoginError('');
         signIn(data.email, data.password)
         .then(result =>{
             const user = result.user;
-            console.log(user);
+            if(user){
+                toast.success('Log In Successful');
+            }
         })
-        .catch(err => console.error(err))
+        .catch(error => {
+            const errorMessage = error.message;
+            setLoginError(errorMessage);
+        })
 
         reset();
     }
@@ -38,6 +47,11 @@ const SignIn = () => {
                             minLength: {value:6, message:"Password must be at least 6 characters."}
                         })} type="password" placeholder="Your Password" className="input input-bordered w-full" />
                         {errors.password && <p className='text-sm mt-2 text-red-500'>{errors.password?.message}</p>}
+                        <div>
+                            {
+                                loginError && <p className='text-red-500 mt-2'>{loginError}</p>
+                            }
+                        </div>
                         <label className="label"><span className="label-text">Forget Password?</span></label>
                     </div>
                     <input value='Sign In' className='btn w-full my-4 bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500' type="submit" />

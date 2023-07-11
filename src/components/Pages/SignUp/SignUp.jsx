@@ -3,17 +3,20 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../Contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors },reset } = useForm();
     const {createUser} = useContext(AuthContext)
     const handleSignIn = (data) => {
+        // creating user with email and password
         createUser(data.email, data.password)
         .then(result =>{
             const user = result.user;
-            console.log(user);
+            toast.success("Account created successfully");
         })
-        .catch(err => console.error(err))
+        .catch(err => console.error(err.message));
+
         reset();
     }
     return (
