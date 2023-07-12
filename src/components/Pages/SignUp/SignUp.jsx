@@ -19,9 +19,7 @@ const SignUp = () => {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                if (user) {
-                    toast.success('Log In Successful');
-                }
+
                 // Updating user name when signing up with email and password
                 const userInfo = {
                     displayName: data.name,
@@ -32,27 +30,32 @@ const SignUp = () => {
                         saveUserToDB(data.accountType, data.name, data.email, data.image);
                     })
                     .catch((error) => console.log(error.message));
+
+                if (user) {
+                    toast.success('Log In Successful');
+                    reset();
+                    navigate('/');
+                }
             })
             .catch(err => {
                 setSignUpError(err.message);
             });
-            reset();
-            navigate('/');
+
     }
 
     // Saving users data into database
-    const saveUserToDB =(role, name, email , imageURL)=>{
-        const user ={role, name, email, imageURL}
-        fetch('http://localhost:5000/allUsers',{
-            method:'POST',
-            headers:{
-                'content-type':'application/json'
+    const saveUserToDB = (role, name, email, imageURL) => {
+        const user = { role, name, email, imageURL }
+        fetch('http://localhost:5000/allUsers', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
             },
-            body:JSON.stringify(user)
+            body: JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(data =>{
-        })
+            .then(res => res.json())
+            .then(data => {
+            })
     }
 
 
