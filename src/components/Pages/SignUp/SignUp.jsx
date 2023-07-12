@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
@@ -8,30 +8,35 @@ import { toast } from 'react-hot-toast';
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
+    const [signUpError, setSignUpError] = useState('');
 
 
     const handleSignIn = (data) => {
         // creating user with email and password
+        setSignUpError('');
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 if (user) {
                     toast.success('Log In Successful');
-                
-                // Updating user name when signing up with email and password
-                updateUser({
-                    displayName: data.name,
-                    photoURL: data.image
-                })
-                    .then(() => { })
-                    .catch((error) => {
-                        console.log(error.message);
-                    });
+
+                    // Updating user name when signing up with email and password
+                    updateUser({
+                        displayName: data.name,
+                        photoURL: data.image
+                    })
+                        .then(() => { })
+                        .catch((error) => {
+                            console.log(error.message);
+                        });
                 }
-                    
+
             })
-            .catch(err => console.error(err.message));
-            reset();
+            .catch(err => {
+                console.error(err.message);
+                setSignUpError(err.message);
+            });
+        reset();
     }
 
 
@@ -101,6 +106,9 @@ const SignUp = () => {
                         {errors.password && <p className='text-sm mt-2 text-red-500'>{errors.password?.message}</p>}
                         <label className="label"><span className="label-text">Forget Password?</span></label>
                     </div>
+                    {
+                        signUpError && <p className='text-red-500 my-2'>{signUpError}</p>  
+                    }
                     <input value='Sign Up' className='btn w-full my-4 bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500' type="submit" />
                 </form>
                 <p className='text-sm text-center'>Already have an account? <Link className='text-blue-400' to='/signIn'>Sign In</Link> </p>

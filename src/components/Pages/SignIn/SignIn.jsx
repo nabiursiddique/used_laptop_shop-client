@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
@@ -9,6 +9,9 @@ const SignIn = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { signIn, googleSignIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     // Sign in with email and password
     const handleSignIn = (data) => {
@@ -19,6 +22,7 @@ const SignIn = () => {
                 if (user) {
                     toast.success('Log In Successful');
                     reset();
+                    navigate(from, {replace:true});
                 }
             })
             .catch(error => {
