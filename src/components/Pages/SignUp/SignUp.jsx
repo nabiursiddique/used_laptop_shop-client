@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { set, useForm } from 'react-hook-form';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
@@ -9,6 +9,8 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
+
+    const navigate = useNavigate();
 
 
     const handleSignIn = (data) => {
@@ -19,24 +21,23 @@ const SignUp = () => {
                 const user = result.user;
                 if (user) {
                     toast.success('Log In Successful');
-
-                    // Updating user name when signing up with email and password
-                    updateUser({
-                        displayName: data.name,
-                        photoURL: data.image
-                    })
-                        .then(() => { })
-                        .catch((error) => {
-                            console.log(error.message);
-                        });
                 }
-
+                // Updating user name when signing up with email and password
+                const userInfo = {
+                    displayName: data.name,
+                    photoURL: data.image
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        
+                    })
+                    .catch((error) => console.log(error.message));
             })
             .catch(err => {
-                console.error(err.message);
                 setSignUpError(err.message);
             });
-        reset();
+            reset();
+            navigate('/');
     }
 
 
@@ -107,7 +108,7 @@ const SignUp = () => {
                         <label className="label"><span className="label-text">Forget Password?</span></label>
                     </div>
                     {
-                        signUpError && <p className='text-red-500 my-2'>{signUpError}</p>  
+                        signUpError && <p className='text-red-500 my-2'>{signUpError}</p>
                     }
                     <input value='Sign Up' className='btn w-full my-4 bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500' type="submit" />
                 </form>
