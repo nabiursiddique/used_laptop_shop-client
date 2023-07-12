@@ -29,7 +29,7 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        
+                        saveUserToDB(data.accountType, data.name, data.email, data.image);
                     })
                     .catch((error) => console.log(error.message));
             })
@@ -38,6 +38,21 @@ const SignUp = () => {
             });
             reset();
             navigate('/');
+    }
+
+    // Saving users data into database
+    const saveUserToDB =(role, name, email , imageURL)=>{
+        const user ={role, name, email, imageURL}
+        fetch('http://localhost:5000/allUsers',{
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data =>{
+        })
     }
 
 
