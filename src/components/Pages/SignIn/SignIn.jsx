@@ -9,6 +9,8 @@ const SignIn = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { signIn, googleSignIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
+
+    // For private route
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -39,6 +41,7 @@ const SignIn = () => {
                 const user = result.user;
                 if (user) {
                     toast.success("Login successful");
+                    navigate(from, {replace:true});
                 }
             })
             .catch(error => {
