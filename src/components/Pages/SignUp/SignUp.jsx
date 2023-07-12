@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const { createUser, googleSignIn } = useContext(AuthContext);
+    const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
 
 
     const handleSignIn = (data) => {
@@ -15,6 +15,16 @@ const SignUp = () => {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
+
+                // Updating user name when signing up with email and password
+                updateUser({
+                    displayName: data.name,
+                })
+                .then(()=>{})
+                .catch((error)=>{
+                    console.log(error.message);
+                });
+
                 if (user) {
                     toast.success("Account created successfully");
                 }
@@ -29,8 +39,9 @@ const SignUp = () => {
         googleSignIn()
             .then(result => {
                 const user = result.user;
-                const name = user.displayName;
-                toast.success(`${name} logged in successfully.`);
+                if (user) {
+                    toast.success("Log In Successful");
+                }
             })
             .catch(error => {
                 console.log(error.message);

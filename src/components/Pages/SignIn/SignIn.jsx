@@ -6,38 +6,39 @@ import { AuthContext } from '../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
 
 const SignIn = () => {
-    const { register, handleSubmit, formState: { errors },reset } = useForm();
-    const {signIn, googleSignIn}=useContext(AuthContext);
-    const [loginError, setLoginError] =useState('');
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { signIn, googleSignIn } = useContext(AuthContext);
+    const [loginError, setLoginError] = useState('');
 
     // Sign in with email and password
     const handleSignIn = (data) => {
         setLoginError('');
         signIn(data.email, data.password)
-        .then(result =>{
-            const user = result.user;
-            if(user){
-                toast.success('Log In Successful');
-            }
-        })
-        .catch(error => {
-            const errorMessage = error.message;
-            setLoginError(errorMessage);
-        })
+            .then(result => {
+                const user = result.user;
+                if (user) {
+                    toast.success('Log In Successful');
+                }
+            })
+            .catch(error => {
+                const errorMessage = error.message;
+                setLoginError(errorMessage);
+            })
         reset();
     }
 
     // Sign in with google
-    const google =()=>{
+    const google = () => {
         googleSignIn()
-        .then(result =>{
-            const user = result.user;
-            const name =user.displayName;
-            toast.success(`${name} logged in successfully.`);
-        })
-        .catch(error =>{
-            console.error(error);
-        })
+            .then(result => {
+                const user = result.user;
+                if (user) {
+                    toast.success("Login successful");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
 
     return (
@@ -56,7 +57,7 @@ const SignIn = () => {
                         <input {...register("password", {
                             required: "Password is required.",
                             maxLength: 20,
-                            minLength: {value:6, message:"Password must be at least 6 characters."}
+                            minLength: { value: 6, message: "Password must be at least 6 characters." }
                         })} type="password" placeholder="Your Password" className="input input-bordered w-full" />
                         {errors.password && <p className='text-sm mt-2 text-red-500'>{errors.password?.message}</p>}
                         <div>
