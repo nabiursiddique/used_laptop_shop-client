@@ -15,23 +15,23 @@ const SignUp = () => {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-
+                if (user) {
+                    toast.success('Log In Successful');
+                
                 // Updating user name when signing up with email and password
                 updateUser({
                     displayName: data.name,
+                    photoURL: data.image
                 })
-                .then(()=>{})
-                .catch((error)=>{
-                    console.log(error.message);
-                });
-
-                if (user) {
-                    toast.success("Account created successfully");
+                    .then(() => { })
+                    .catch((error) => {
+                        console.log(error.message);
+                    });
                 }
+                    
             })
             .catch(err => console.error(err.message));
-
-        reset();
+            reset();
     }
 
 
@@ -79,6 +79,13 @@ const SignUp = () => {
                             required: "Email Address is required."
                         })} type="text" placeholder="Your Email" className="input input-bordered w-full" />
                         {errors.email && <p className='text-sm mt-2 text-red-500'>{errors.email?.message}</p>}
+                    </div>
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Image URL</span></label>
+                        <input {...register("image", {
+                            required: "Image link is required."
+                        })} type="text" placeholder="Your Image Url" className="input input-bordered w-full" />
+                        {errors.image && <p className='text-sm mt-2 text-red-500'>{errors.image?.message}</p>}
                     </div>
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Password</span></label>

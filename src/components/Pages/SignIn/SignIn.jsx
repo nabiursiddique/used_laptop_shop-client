@@ -18,13 +18,14 @@ const SignIn = () => {
                 const user = result.user;
                 if (user) {
                     toast.success('Log In Successful');
+                    reset();
                 }
             })
             .catch(error => {
                 const errorMessage = error.message;
                 setLoginError(errorMessage);
             })
-        reset();
+        
     }
 
     // Sign in with google
