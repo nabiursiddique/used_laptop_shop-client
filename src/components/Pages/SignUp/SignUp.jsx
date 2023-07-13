@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { set, useForm } from 'react-hook-form';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';

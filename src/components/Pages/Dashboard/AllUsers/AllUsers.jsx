@@ -8,7 +8,7 @@ const AllUsers = () => {
         .then(data => setAllUsers(data))
     return (
         <div>
-            <h2 className='text-3xl text-center my-5 font-bold'>All users </h2>
+            <h2 className='text-3xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>All users </h2>
 
             <div className="overflow-x-auto">
                 <table className="table ">
