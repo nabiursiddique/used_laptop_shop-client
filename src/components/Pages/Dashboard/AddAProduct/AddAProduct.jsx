@@ -2,21 +2,23 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 
 const AddAProduct = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
 
     // date and time 
     const currentDate = new Date();
     const date = format(currentDate, 'PP');
     const time = format(currentDate, 'hh:mm:ss a');
 
-    const addProduct = (data) => {
-        const{productName,originalPrice,resalePrice,yearOfPurchase,category,condition,location,phoneNumber,productImage,productDescription}=data;
+    const category = ["Apple", "Samsung", "Dell", "HP", "Lenovo"];
 
-        const product ={
+    const addProduct = (data) => {
+        const { productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription } = data;
+
+        const product = {
             sellerName: user.displayName,
             sellerImage: user.photoURL,
             email: user.email,
@@ -34,10 +36,23 @@ const AddAProduct = () => {
             time
         }
 
-        console.log(product);
+        // Sending the product information to the database
+        fetch('http://localhost:5000/product', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    toast.success("Product added successfully.");
+                }
+            })
     }
 
-    const category = ["Apple", "Samsung", "Dell", "HP", "Lenovo"];
+
 
     return (
         <div>

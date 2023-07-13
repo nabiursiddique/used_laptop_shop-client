@@ -55,6 +55,9 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
+                if (data) {
+                    console.log("User added successfully.");
+                }
             })
     }
 
