@@ -24,6 +24,7 @@ const Navbar = () => {
   // For menu
   const menu = <>
     <li><Link to='/'>Home</Link></li>
+    <li><Link to='/products'>Products</Link></li>
     <li><Link to='/blog'>Blog</Link></li>
     {
       user?.uid ?

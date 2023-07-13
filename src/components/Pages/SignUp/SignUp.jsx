@@ -61,7 +61,6 @@ const SignUp = () => {
             })
     }
 
-
     const google = () => {
         googleSignIn()
             .then(result => {

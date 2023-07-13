@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 
 const AddAProduct = () => {
     const { user } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors },reset } = useForm();
 
     // date and time 
     const currentDate = new Date();
@@ -48,6 +48,7 @@ const AddAProduct = () => {
             .then(data => {
                 if (data) {
                     toast.success("Product added successfully.");
+                    reset();
                 }
             })
     }
@@ -57,8 +58,6 @@ const AddAProduct = () => {
     return (
         <div>
             <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>Add Your Product</h2>
-            <p>{date}</p>
-            <p>{time}</p>
             <form className='mx-5' onSubmit={handleSubmit(addProduct)}>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4'>
                     {/* Product Name */}

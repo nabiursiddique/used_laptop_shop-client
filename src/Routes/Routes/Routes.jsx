@@ -10,6 +10,7 @@ import Dashboard from "../../components/Pages/Dashboard/Dashboard/Dashboard";
 import AllUsers from "../../components/Pages/Dashboard/AllUsers/AllUsers";
 import MyProducts from "../../components/Pages/Dashboard/MyProducts/MyProducts";
 import AddAProduct from "../../components/Pages/Dashboard/AddAProduct/AddAProduct";
+import Products from "../../components/Pages/Products/Products/Products";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path:'/signIn',
                 element:<SignIn></SignIn>
+            },
+            {
+                path:'/products',
+                element:<Products></Products>
             }
         ]
     },
