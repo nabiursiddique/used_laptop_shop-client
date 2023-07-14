@@ -3,10 +3,12 @@ import { AuthContext } from '../../../../Contexts/AuthProvider';
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddAProduct = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors },reset } = useForm();
+    const navigate = useNavigate();
 
     // date and time 
     const currentDate = new Date();
@@ -49,6 +51,7 @@ const AddAProduct = () => {
                 if (data) {
                     toast.success("Product added successfully.");
                     reset();
+                    navigate('/dashboard');
                 }
             })
     }
