@@ -55,13 +55,14 @@ const MyProducts = () => {
                             <th>Index</th>
                             <th>Name</th>
                             <th>Price</th>
-                            <th>Favorite Color</th>
+                            <th>Condition</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            products.map((product, ind) => <tr>
+                            products.map((product, ind) => 
+                            <tr key={ind}>
                                 <th>
                                     {ind + 1}
                                 </th>
@@ -82,9 +83,9 @@ const MyProducts = () => {
                                     <div className="text-sm"><span className='font-bold'>Orginal Price: </span>{product.originalPrice}</div>
                                     <div className="text-sm"><span className='font-bold'>Resale Price:</span> {product.resalePrice}</div>
                                 </td>
-                                <td>Purple</td>
+                                <td>{product.condition}</td>
                                 <td>
-                                    <label htmlFor="confirmation_modal" onClick={()=>setDeletingProduct(product)} className="btn btn-error text-white btn-sm">X</label>
+                                    <label htmlFor="confirmation_modal" onClick={()=>setDeletingProduct(product)} className="btn bg-red-400 text-white hover:bg-red-500 btn-sm">X</label>
                                 </td>
                             </tr>)
                         }
@@ -100,7 +101,7 @@ const MyProducts = () => {
                     successButtonName={"Delete"}
                     cancelButtonName={"Cancel"}
                     deleteFunction={handleDeleteProduct}
-                    productInfo={deletingProduct}
+                    deletingInfo={deletingProduct}
                 ></ConfirmationModal>
             }
         </div>

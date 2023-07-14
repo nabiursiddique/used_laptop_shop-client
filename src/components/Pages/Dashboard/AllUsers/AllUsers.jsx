@@ -1,26 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
+import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
+import { toast } from 'react-hot-toast';
 
 const AllUsers = () => {
+    const [deletingUser, setDeletingUser] = useState(null);
+
+    const closeModal = () => {
+        setDeletingUser(null);
+    }
+
     // Getting all the user 
-    const {data:allUsers =[],isLoading} = useQuery({
-        queryKey:["allUser"],
-        queryFn:async()=>{
-           try{
-            const res = await fetch('http://localhost:5000/allUsers');
-            const data = await res.json()
-            return data;
-           }
-           catch{
+    const { data: allUsers = [], isLoading, refetch } = useQuery({
+        queryKey: ["allUser"],
+        queryFn: async () => {
+            try {
+                const res = await fetch('http://localhost:5000/allUsers');
+                const data = await res.json()
+                return data;
+            }
+            catch {
 
-           }
-
+            }
         }
     });
 
-    if(isLoading){
+    if (isLoading) {
         return <LoadingAnimation></LoadingAnimation>
+    }
+
+    // Delete user from database (This option will be only for admin role)
+    const handleDeleteUser = (allUser) => {
+        fetch(`http://localhost:5000/allUsers/${allUser._id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.acknowledged) {
+                    toast.success("User deleted successfully.");
+                    refetch();
+                }
+            })
     }
 
     return (
@@ -56,14 +77,25 @@ const AllUsers = () => {
                                     <td>{allUser.role}</td>
                                     <td>{allUser.email}</td>
                                     <th>
-                                    <button className="btn btn-error text-white btn-sm">X</button>
-                                </th>
+                                        <label htmlFor="confirmation_modal" onClick={() => setDeletingUser(allUser)} className="btn btn-error text-white btn-sm">X</label>
+                                    </th>
                                 </tr>)
                         }
                     </tbody>
                 </table>
             </div>
-
+            {
+                deletingUser &&
+                <ConfirmationModal
+                    title={`Are you sure you want to delete ${deletingUser.name}`}
+                    message={`If you delete ${deletingUser.name} it cannot be undone`}
+                    deleteFunction={handleDeleteUser}
+                    successButtonName={"Delete"}
+                    cancelButtonName={"Cancel"}
+                    closeModal={closeModal}
+                    deletingInfo={deletingUser}
+                ></ConfirmationModal>
+            }
         </div>
     );
 };
