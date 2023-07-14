@@ -6,7 +6,6 @@ import SignUp from "../../components/Pages/SignUp/SignUp";
 import SignIn from "../../components/Pages/SignIn/SignIn";
 import PrivateRoute from "../PrivateRoutes/PrivateRoute";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
-import Dashboard from "../../components/Pages/Dashboard/Dashboard/Dashboard";
 import AllUsers from "../../components/Pages/Dashboard/AllUsers/AllUsers";
 import MyProducts from "../../components/Pages/Dashboard/MyProducts/MyProducts";
 import AddAProduct from "../../components/Pages/Dashboard/AddAProduct/AddAProduct";

@@ -1,14 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
+import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
 
 const AllUsers = () => {
-    const [allUsers, setAllUsers] = useState([]);
     // Getting all the user 
-    fetch('http://localhost:5000/allUsers')
-        .then(res => res.json())
-        .then(data => setAllUsers(data))
+    const {data:allUsers =[],isLoading} = useQuery({
+        queryKey:["allUser"],
+        queryFn:async()=>{
+           try{
+            const res = await fetch('http://localhost:5000/allUsers');
+            const data = await res.json()
+            return data;
+           }
+           catch{
+
+           }
+
+        }
+    });
+
+    if(isLoading){
+        return <LoadingAnimation></LoadingAnimation>
+    }
+
     return (
         <div>
-            <h2 className='text-3xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>All users </h2>
+            <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>All Users </h2>
 
             <div className="overflow-x-auto">
                 <table className="table ">
@@ -20,12 +37,13 @@ const AllUsers = () => {
                             <th>Name</th>
                             <th>Role</th>
                             <th>Email</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             allUsers.map((allUser, ind) =>
-                                <tr className="hover">
+                                <tr key={ind} className="hover">
                                     <th>{ind + 1}</th>
                                     <td>
                                         <div className="avatar">
@@ -37,6 +55,9 @@ const AllUsers = () => {
                                     <td>{allUser.name}</td>
                                     <td>{allUser.role}</td>
                                     <td>{allUser.email}</td>
+                                    <th>
+                                    <button className="btn btn-error text-white btn-sm">X</button>
+                                </th>
                                 </tr>)
                         }
                     </tbody>

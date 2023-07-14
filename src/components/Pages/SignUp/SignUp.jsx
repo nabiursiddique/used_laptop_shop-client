@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
+import { useQuery } from 'react-query';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -56,17 +57,22 @@ const SignUp = () => {
             .then(res => res.json())
             .then(data => {
                 if (data) {
-                    console.log("User added successfully.");
+                    
                 }
             })
     }
 
+
+    // Google Sign Up
     const google = () => {
         googleSignIn()
             .then(result => {
-                const user = result.user;
-                if (user) {
-                    toast.success("Log In Successful");
+                console.log(result.user);
+                const {uid,displayName,email,photoURL} = result.user;
+                if (uid) {
+                    saveUserToDB('Buyer', displayName, email, photoURL);
+                    toast.success("Sign up Successful");
+                    navigate('/');
                 }
             })
             .catch(error => {
