@@ -77,7 +77,7 @@ const AllUsers = () => {
                                     <td>{allUser.role}</td>
                                     <td>{allUser.email}</td>
                                     <th>
-                                        <label htmlFor="confirmation_modal" onClick={() => setDeletingUser(allUser)} className="btn btn-error text-white btn-sm hover:bg-red-500">X</label>
+                                        <label htmlFor="confirmation_modal" onClick={() => setDeletingUser(allUser)} className="btn bg-red-400 text-white btn-sm hover:bg-red-500">X</label>
                                     </th>
                                 </tr>)
                         }

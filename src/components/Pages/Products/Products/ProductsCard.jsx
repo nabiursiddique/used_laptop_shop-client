@@ -23,7 +23,7 @@ const ProductsCard = ({ product }) => {
                 <h4><span className='font-bold'>Orginal Price:</span> {originalPrice} </h4>
                 <h4><span className='font-bold'>Resale Price:</span> {resalePrice}</h4>
                 <div className="card-actions">
-                    <button className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Buy Now</button>
+                    <button className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Book Now</button>
                 </div>
             </div>
         </div>

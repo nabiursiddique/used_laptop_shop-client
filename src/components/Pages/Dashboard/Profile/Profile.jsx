@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
+import useUserRole from '../../../../Hooks/useUserRole';
 
 const Profile = () => {
     const { user, logOut } = useContext(AuthContext);    
+    const [role] = useUserRole(user?.email);
 
     // For logout
     const handleLogout = () => {
@@ -16,6 +18,7 @@ const Profile = () => {
                 toast.error("Logout not successful")
             })
     }
+
 
     return (
         <div>
@@ -36,6 +39,7 @@ const Profile = () => {
                                 <h4 className='text-base'><span className='font-bold'>Email verified: </span>No</h4>
 
                         }
+                        <h4 className='text-base'><span className='font-bold'>Role: </span>{role}</h4>
                         <h4 className='text-base'><span className='font-bold'>UID: </span>{user.uid}</h4>
                         <div className="card-actions justify-center">
                             <button onClick={handleLogout} className="btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full mt-4">Logout</button>
