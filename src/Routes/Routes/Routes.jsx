@@ -44,7 +44,11 @@ const router = createBrowserRouter([
         element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children:[
             {
-                path:'/dashboard',
+                path:'/dashboard/profile',
+                element:<Profile></Profile>
+            },
+            {
+                path:'/dashboard/myProduct',
                 element:<MyProducts></MyProducts>
             },
             {
@@ -55,10 +59,6 @@ const router = createBrowserRouter([
                 path:'/dashboard/addAProduct',
                 element:<AddAProduct></AddAProduct>
             },
-            {
-                path:'/dashboard/profile',
-                element:<Profile></Profile>
-            }
         ]
     }
 ]);
