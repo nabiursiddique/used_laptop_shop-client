@@ -22,7 +22,6 @@ const MyProducts = () => {
                 return data;
             }
             catch (error) {
-
             }
         }
     });

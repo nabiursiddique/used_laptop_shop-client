@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
 
     // Update user profile (name, image)
     const updateUser =(userInfo)=>{
-        setLoading(true);
+        setLoading(false);
         return updateProfile(auth.currentUser, userInfo);
     }
 
