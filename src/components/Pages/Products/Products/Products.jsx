@@ -21,9 +21,47 @@ const Products = () => {
             }
         }
     })
+
     if (isLoading) {
         return <LoadingAnimation></LoadingAnimation>
     }
+
+     //booking modal close handle
+     const closeModal = () => {
+        setBookProduct(null);
+    }
+
+    // handleBooking function for bookingNowModal
+    const handleBooking = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const productName = form.productName.value;
+        const sellerName = form.sellerName.value;
+        const sellerEmail = form.sellerEmail.value;
+        const sellerPhone = form.sellerPhone.value;
+        const buyerName = form.buyerName.value;
+        const buyerEmail = form.buyerEmail.value;
+        const productPrice = form.productPrice.value;
+        const meetingLocation = form.meetingLocation.value;
+        const buyerNumber = form.buyerNumber.value;
+
+        const bookingInfo = {
+            productName,
+            sellerName,
+            sellerPhone,
+            sellerEmail,
+            buyerName,
+            buyerEmail,
+            productPrice,
+            meetingLocation,
+            buyerNumber
+        }
+        console.log(bookingInfo);
+        form.reset();
+        setBookProduct(null);
+    }
+
+
     return (
         <div>
             <div>
@@ -52,6 +90,8 @@ const Products = () => {
                 bookProduct &&
                 <BookNowModal
                     bookProduct={bookProduct}
+                    handleBooking={handleBooking}
+                    closeModal={closeModal}
                 ></BookNowModal>
             }
         </div>
