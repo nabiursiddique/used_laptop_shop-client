@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
 import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
 import { toast } from 'react-hot-toast';
 
-const AllUsers = () => {
+const AllBuyers = () => {
     const [deletingUser, setDeletingUser] = useState(null);
 
     const closeModal = () => {
@@ -12,27 +12,23 @@ const AllUsers = () => {
     }
 
     // Getting all the user 
-    const { data: allUsers = [], isLoading, refetch } = useQuery({
-        queryKey: ["allUser"],
+    const { data: buyers = [], isLoading, refetch } = useQuery({
+        queryKey: ["buyer"],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/allUsers');
-                const data = await res.json()
+                const res = await fetch('http://localhost:5000/allBuyers?role=Buyer');
+                const data = await res.json();
                 return data;
             }
-            catch {
-
+            catch (error) {
+                console.log(error);
             }
         }
     });
 
-    if (isLoading) {
-        return <LoadingAnimation></LoadingAnimation>
-    }
-
-    // Delete user from database
-    const handleDeleteUser = (allUser) => {
-        fetch(`http://localhost:5000/allUsers/${allUser._id}`, {
+    // Delete user from database (This option will be only for admin role)
+    const handleDeleteUser = (buyer) => {
+        fetch(`http://localhost:5000/allUsers/${buyer._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -44,13 +40,15 @@ const AllUsers = () => {
             })
     }
 
+    if (isLoading) {
+        return <LoadingAnimation></LoadingAnimation>
+    }
     return (
         <div>
-            <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>All Users </h2>
+            <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>All Buyers </h2>
 
             <div className="overflow-x-auto">
                 <table className="table ">
-                    {/* head */}
                     <thead>
                         <tr>
                             <th>Index</th>
@@ -63,21 +61,21 @@ const AllUsers = () => {
                     </thead>
                     <tbody>
                         {
-                            allUsers.map((allUser, ind) =>
+                            buyers.map((buyer, ind) =>
                                 <tr key={ind} className="hover">
                                     <th>{ind + 1}</th>
                                     <td>
                                         <div className="avatar">
                                             <div className="mask mask-circle w-12 h-12">
-                                                <img src={allUser.imageURL} alt="Avatar Tailwind CSS Component" />
+                                                <img src={buyer.imageURL} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{allUser.name}</td>
-                                    <td>{allUser.role}</td>
-                                    <td>{allUser.email}</td>
+                                    <td>{buyer.name}</td>
+                                    <td>{buyer.role}</td>
+                                    <td>{buyer.email}</td>
                                     <th>
-                                        <label htmlFor="confirmation_modal" onClick={() => setDeletingUser(allUser)} className="btn bg-red-400 text-white btn-sm hover:bg-red-500">X</label>
+                                        <label htmlFor="confirmation_modal" onClick={() => setDeletingUser(buyer)} className="btn bg-red-400 text-white btn-sm hover:bg-red-500">X</label>
                                     </th>
                                 </tr>)
                         }
@@ -100,4 +98,4 @@ const AllUsers = () => {
     );
 };
 
-export default AllUsers;
+export default AllBuyers;

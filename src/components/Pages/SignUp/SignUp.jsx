@@ -28,11 +28,12 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUserToDB(data.accountType, data.name, data.email, data.image);
+                        
                     })
                     .catch((error) => console.log(error.message));
 
                 if (user) {
+                    saveUserToDB(data.accountType, data.name, data.email, data.image);
                     toast.success('Log In Successful');
                     reset();
                     navigate('/');

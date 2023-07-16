@@ -51,7 +51,7 @@ const AddAProduct = () => {
                 if (data) {
                     toast.success("Product added successfully.");
                     reset();
-                    navigate('/dashboard');
+                    navigate('/dashboard/myProduct');
                 }
             })
     }

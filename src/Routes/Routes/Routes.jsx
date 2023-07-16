@@ -11,6 +11,8 @@ import MyProducts from "../../components/Pages/Dashboard/MyProducts/MyProducts";
 import AddAProduct from "../../components/Pages/Dashboard/AddAProduct/AddAProduct";
 import Products from "../../components/Pages/Products/Products/Products";
 import Profile from "../../components/Pages/Dashboard/Profile/Profile";
+import AllBuyers from "../../components/Pages/Dashboard/AllBuyers/AllBuyers";
+import AllSellers from "../../components/Pages/Dashboard/AllSellers/AllSellers";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
             {
                 path:'/dashboard/addAProduct',
                 element:<AddAProduct></AddAProduct>
+            },
+            {
+                path:'/dashboard/allBuyers',
+                element:<AllBuyers></AllBuyers>
+            },
+            {
+                path:'/dashboard/allSellers',
+                element:<AllSellers></AllSellers>
             },
         ]
     }
