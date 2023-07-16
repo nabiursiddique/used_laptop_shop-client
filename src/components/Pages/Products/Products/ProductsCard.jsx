@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductsCard = ({ product }) => {
+const ProductsCard = ({ product, setBookProduct }) => {
     const { sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription, date, time } = product;
     return (
         <div className="card bg-base-100 shadow-xl border border-white">
@@ -19,11 +19,12 @@ const ProductsCard = ({ product }) => {
                 <p className='text-sm'><span className='font-bold'>Location:</span> {location}</p>
                 <p className='text-sm'><span className='font-bold'>Conditon:</span> {condition}</p>
                 <p className='text-sm'><span className='font-bold'>Purchase Year:</span> {yearOfPurchase}</p>
+                <p className='text-sm'><span className='font-bold'>Email:</span> {email}</p>
                 <p className='text-sm'><span className='font-bold'>Phone Number:</span> {phoneNumber}</p>
                 <h4><span className='font-bold'>Orginal Price:</span> {originalPrice} </h4>
                 <h4><span className='font-bold'>Resale Price:</span> {resalePrice}</h4>
                 <div className="card-actions">
-                    <button className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Book Now</button>
+                    <label onClick={()=>setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Book Now</label>
                 </div>
             </div>
         </div>

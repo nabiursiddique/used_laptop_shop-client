@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import ProductsCard from './ProductsCard';
 import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
+import BookNowModal from '../BookNowModal/BookNowModal';
 
 const Products = () => {
+    const [bookProduct, setBookProduct] = useState(null);
+
     // React query for fetching
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
@@ -32,6 +35,7 @@ const Products = () => {
                                 products.map((product, ind) => <ProductsCard
                                     key={ind}
                                     product={product}
+                                    setBookProduct={setBookProduct}
                                 ></ProductsCard>)
                             }
                         </div>
@@ -44,6 +48,12 @@ const Products = () => {
                         </div>
                 }
             </div>
+            {
+                bookProduct &&
+                <BookNowModal
+                    bookProduct={bookProduct}
+                ></BookNowModal>
+            }
         </div>
     );
 };
