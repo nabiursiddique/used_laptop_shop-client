@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import ProductsCard from './ProductsCard';
 import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
 import BookNowModal from '../BookNowModal/BookNowModal';
+import { toast } from 'react-hot-toast';
 
 const Products = () => {
     const [bookProduct, setBookProduct] = useState(null);
@@ -48,17 +49,34 @@ const Products = () => {
         const bookingInfo = {
             productName,
             sellerName,
-            sellerPhone,
             sellerEmail,
+            sellerPhone,
             buyerName,
             buyerEmail,
             productPrice,
             meetingLocation,
             buyerNumber
         }
-        console.log(bookingInfo);
-        form.reset();
         setBookProduct(null);
+
+        // saving booking information in the db
+        fetch('http://localhost:5000/booking',{
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(bookingInfo)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            if(data.acknowledged){
+                toast.success("Booking Successful");
+            }else{
+                toast.error("Booking is not successful");
+            }
+        })
+
+        form.reset();
     }
 
 

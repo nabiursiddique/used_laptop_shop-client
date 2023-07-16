@@ -74,7 +74,7 @@ const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
                                     </div>
                                     <div className=" flex  font-bold my-3">
                                         <label className="text-base bg-gradient-to-r from-sky-700  to-sky-400 text-transparent bg-clip-text mr-1">Meeting Location :</label>
-                                        <input className='bg-transparent border border-blue-400'
+                                        <input className='bg-transparent border border-blue-400 px-2'
                                             name='meetingLocation'
                                             type="text"
                                             required
@@ -82,7 +82,7 @@ const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
                                     </div>
                                     <div className=" flex  font-bold my-3">
                                         <label className="text-base bg-gradient-to-r from-sky-700  to-sky-400 text-transparent bg-clip-text mr-1">Your Phone Number :</label>
-                                        <input className='bg-transparent border border-blue-400'
+                                        <input className='bg-transparent border border-blue-400 px-2'
                                             name='buyerNumber'
                                             type="text"
                                             required
