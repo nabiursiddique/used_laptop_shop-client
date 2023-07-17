@@ -10,38 +10,55 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
+    const imageHostKey = import.meta.env.VITE_APP_imagebb_key;
 
     const navigate = useNavigate();
 
 
-    const handleSignIn = (data) => {
-        // creating user with email and password
-        setSignUpError('');
-        createUser(data.email, data.password)
-            .then(result => {
-                const user = result.user;
+    const handleSignUp = (data) => {
+        // Image hosting
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then((res) => res.json())
+            .then((imgData) => {
+                if (imgData.success) {
+                    // creating user with email and password
+                    setSignUpError('');
+                    createUser(data.email, data.password)
+                        .then(result => {
+                            const user = result.user;
 
-                // Updating user name when signing up with email and password
-                const userInfo = {
-                    displayName: data.name,
-                    photoURL: data.image
-                }
-                updateUser(userInfo)
-                    .then(() => {
-                        
-                    })
-                    .catch((error) => console.log(error.message));
+                            // Updating user name when signing up with email and password
+                            const userInfo = {
+                                displayName: data.name,
+                                photoURL: imgData.data.url
+                            }
+                            updateUser(userInfo)
+                                .then(() => { })
+                                .catch((error) => console.log(error.message));
 
-                if (user) {
-                    saveUserToDB(data.accountType, data.name, data.email, data.image);
-                    toast.success('Log In Successful');
-                    reset();
-                    navigate('/');
+                            if (user) {
+                                saveUserToDB(data.accountType, data.name, data.email,  imgData.data.url);
+                                toast.success('Log In Successful');
+                                reset();
+                                navigate('/');
+                            }
+                        })
+                        .catch(err => {
+                            setSignUpError(err.message);
+                        });
                 }
             })
-            .catch(err => {
-                setSignUpError(err.message);
+            .catch((error)=>{
+                console.log(error);
             });
+
 
     }
 
@@ -58,18 +75,17 @@ const SignUp = () => {
             .then(res => res.json())
             .then(data => {
                 if (data) {
-                    
+
                 }
             })
     }
-
 
     // Google Sign Up
     const google = () => {
         googleSignIn()
             .then(result => {
                 console.log(result.user);
-                const {uid,displayName,email,photoURL} = result.user;
+                const { uid, displayName, email, photoURL } = result.user;
                 if (uid) {
                     saveUserToDB('Buyer', displayName, email, photoURL);
                     toast.success("Sign up Successful");
@@ -86,7 +102,7 @@ const SignUp = () => {
             <div className='w-96 p-7 my-7 shadow-lg border border-white rounded-lg'>
                 <h2 className='text-center text-4xl mt-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>SIGN UP</h2>
 
-                <form onSubmit={handleSubmit(handleSignIn)}>
+                <form onSubmit={handleSubmit(handleSignUp)}>
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Account Type</span>
@@ -113,11 +129,13 @@ const SignUp = () => {
                         })} type="text" placeholder="Your Email" className="input input-bordered w-full" />
                         {errors.email && <p className='text-sm mt-2 text-red-500'>{errors.email?.message}</p>}
                     </div>
-                    <div className="form-control w-full">
-                        <label className="label"><span className="label-text">Image URL</span></label>
+                    <div className="form-control w-full ">
+                        <label className="label">
+                            <span className="label-text">Your Photo</span>
+                        </label>
                         <input {...register("image", {
-                            required: "Image link is required."
-                        })} type="text" placeholder="Your Image Url" className="input input-bordered w-full" />
+                            required: "Product photo is required."
+                        })} type="file" placeholder="Type here" className="file-input file-input-bordered w-full" />
                         {errors.image && <p className='text-sm mt-2 text-red-500'>{errors.image?.message}</p>}
                     </div>
                     <div className="form-control w-full">

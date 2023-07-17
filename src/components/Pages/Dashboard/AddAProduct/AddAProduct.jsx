@@ -19,6 +19,7 @@ const AddAProduct = () => {
     const category = ["Apple", "Samsung", "Dell", "HP", "Lenovo"];
 
     const handleAddProduct = (data) => {
+        // Image hosting
         const image =data.image[0];
         const formData = new FormData();
         formData.append('image',image);
@@ -184,18 +185,6 @@ const AddAProduct = () => {
                         {errors.image && <p className='text-sm mt-2 text-red-500'>{errors.image?.message}</p>}
                     </div>
 
-                    {/* Product image url */}
-                    {/* This is for temporary image url soon we will implement the upload image option*/}
-                    {/* <div className="form-control w-full ">
-                        <label className="label">
-                            <span className="label-text">Product Image</span>
-                        </label>
-                        <input {...register("productImage", {
-                            required: "Product photo is required."
-                        })} type="text" placeholder="Image URL" className="input input-bordered w-full" />
-                        {errors.productImage && <p className='text-sm mt-2 text-red-500'>{errors.productImage?.message}</p>}
-                    </div> */}
-
                     {/* Product Description */}
                     <div className="form-control w-full ">
                         <label className="label">
@@ -206,7 +195,6 @@ const AddAProduct = () => {
                         })} className="textarea textarea-bordered w-full" placeholder="Product Description"></textarea>
                         {errors.productDescription && <p className='text-sm mt-2 text-red-500'>{errors.productDescription?.message}</p>}
                     </div>
-
                 </div>
                 <div className='flex justify-center items-center'>
                     <input className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 my-5' type="submit" value="Add Product" />
