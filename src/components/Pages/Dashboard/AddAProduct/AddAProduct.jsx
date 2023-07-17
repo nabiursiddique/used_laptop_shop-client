@@ -9,6 +9,7 @@ const AddAProduct = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors },reset } = useForm();
     const navigate = useNavigate();
+    const imageHostKey = import.meta.env.VITE_APP_imagebb_key;
 
     // date and time 
     const currentDate = new Date();
@@ -17,51 +18,65 @@ const AddAProduct = () => {
 
     const category = ["Apple", "Samsung", "Dell", "HP", "Lenovo"];
 
-    const addProduct = (data) => {
-        const { productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription } = data;
-
-        const product = {
-            sellerName: user.displayName,
-            sellerImage: user.photoURL,
-            email: user.email,
-            productName,
-            originalPrice,
-            resalePrice,
-            yearOfPurchase,
-            category,
-            condition,
-            location,
-            phoneNumber,
-            productImage,
-            productDescription,
-            date,
-            time
-        }
-
-        // Sending the product information to the database
-        fetch('http://localhost:5000/product', {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(product)
+    const handleAddProduct = (data) => {
+        const image =data.image[0];
+        const formData = new FormData();
+        formData.append('image',image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+        fetch(url,{
+            method:'POST',
+            body: formData
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data) {
-                    toast.success("Product added successfully.");
-                    reset();
-                    navigate('/dashboard/myProduct');
+        .then((res) => res.json())
+        .then((imgData) =>{
+            if(imgData.success){
+                const { productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productDescription } = data;
+
+                const product = {
+                    sellerName: user.displayName,
+                    sellerImage: user.photoURL,
+                    email: user.email,
+                    productName,
+                    originalPrice,
+                    resalePrice,
+                    yearOfPurchase,
+                    category,
+                    condition,
+                    location,
+                    phoneNumber,
+                    productImage:imgData.data.url,
+                    productDescription,
+                    date,
+                    time
                 }
-            })
+        
+                // Sending the product information to the database
+                fetch('http://localhost:5000/product', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(product)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data) {
+                            toast.success("Product added successfully.");
+                            reset();
+                            navigate('/dashboard/myProduct');
+                        }
+                    })
+            }
+        })
+        .catch((error)=>{
+            console.log(error);
+        });
     }
-
-
 
     return (
         <div>
             <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>Add Your Product</h2>
-            <form className='mx-5' onSubmit={handleSubmit(addProduct)}>
+            <form className='mx-5' onSubmit={handleSubmit(handleAddProduct)}>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4'>
                     {/* Product Name */}
                     <div className="form-control w-full ">
@@ -159,20 +174,19 @@ const AddAProduct = () => {
                     </div>
 
                     {/* Product image */}
-                    {/* We will implement it when we will set imagebb */}
-                    {/* <div className="form-control w-full ">
+                    <div className="form-control w-full ">
                         <label className="label">
                             <span className="label-text">Product Photo</span>
                         </label>
-                        <input {...register("productPhoto", {
+                        <input {...register("image", {
                             required: "Product photo is required."
                         })} type="file" placeholder="Type here" className="file-input file-input-bordered w-full" />
-                        {errors.productPhoto && <p className='text-sm mt-2 text-red-500'>{errors.productPhoto?.message}</p>}
-                    </div> */}
+                        {errors.image && <p className='text-sm mt-2 text-red-500'>{errors.image?.message}</p>}
+                    </div>
 
                     {/* Product image url */}
                     {/* This is for temporary image url soon we will implement the upload image option*/}
-                    <div className="form-control w-full ">
+                    {/* <div className="form-control w-full ">
                         <label className="label">
                             <span className="label-text">Product Image</span>
                         </label>
@@ -180,7 +194,7 @@ const AddAProduct = () => {
                             required: "Product photo is required."
                         })} type="text" placeholder="Image URL" className="input input-bordered w-full" />
                         {errors.productImage && <p className='text-sm mt-2 text-red-500'>{errors.productImage?.message}</p>}
-                    </div>
+                    </div> */}
 
                     {/* Product Description */}
                     <div className="form-control w-full ">
