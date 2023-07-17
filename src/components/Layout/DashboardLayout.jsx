@@ -27,13 +27,14 @@ const DashboardLayout = () => {
                         {
                             role === "Buyer" &&
                             <>
-                                <li><Link to='/dashboard/allUsers'>My Orders</Link></li>
+                                <li><Link to='/dashboard/myOrders'>My Orders</Link></li>
                             </>
                         }
                         {
                             role === "Seller" &&
                             <>
                                 <li><Link to='/dashboard/myProduct'>My Products</Link></li>
+                                <li><Link to='/dashboard/myOrders'>My Orders</Link></li>
                                 <li><Link to='/dashboard/addAProduct'>Add a Product</Link></li>
                                 <li><Link to='/dashboard/addAProduct'>My Buyers</Link></li>
                             </>
