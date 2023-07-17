@@ -55,6 +55,7 @@ const MyProducts = () => {
                             <th>Name</th>
                             <th>Price</th>
                             <th>Condition</th>
+                            <th>Booking status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -83,6 +84,12 @@ const MyProducts = () => {
                                     <div className="text-sm"><span className='font-bold'>Resale Price:</span> {product.resalePrice}</div>
                                 </td>
                                 <td>{product.condition}</td>
+                                {
+                                    product.booked?
+                                    <td><p>Booked</p></td>
+                                    :
+                                    <td><p>Not Booked</p></td>
+                                }
                                 <td>
                                     <label htmlFor="confirmation_modal" onClick={()=>setDeletingProduct(product)} className="btn bg-red-400 text-white hover:bg-red-500 btn-sm">X</label>
                                 </td>

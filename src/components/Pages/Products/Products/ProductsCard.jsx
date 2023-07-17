@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ProductsCard = ({ product, setBookProduct }) => {
-    const { _id, sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription, date, time } = product;
+    const { sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription, date, time, booked } = product;
     return (
         <div className="card bg-base-100 shadow-xl border border-white">
             <figure><img className='lg:h-80 md:h-80 sm:h-auto' src={productImage} alt={category} /></figure>
@@ -24,7 +24,7 @@ const ProductsCard = ({ product, setBookProduct }) => {
                 <h4><span className='font-bold'>Orginal Price:</span> {originalPrice} </h4>
                 <h4><span className='font-bold'>Resale Price:</span> {resalePrice}</h4>
                 <div className="card-actions">
-                    <label onClick={()=>setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Book Now</label>
+                    <label onClick={() => setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Book Now</label>
                 </div>
             </div>
         </div>
