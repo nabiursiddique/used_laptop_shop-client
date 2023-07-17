@@ -135,7 +135,7 @@ const SignUp = () => {
                         </label>
                         <input {...register("image", {
                             required: "Product photo is required."
-                        })} type="file" placeholder="Type here" className="file-input file-input-bordered w-full" />
+                        })} type="file" placeholder="Type here" className="file-input file-input-bordered file-input-info w-full" />
                         {errors.image && <p className='text-sm mt-2 text-red-500'>{errors.image?.message}</p>}
                     </div>
                     <div className="form-control w-full">
