@@ -9,7 +9,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext);
     const [deletingProduct, setDeletingProduct] = useState(null);
 
-    const closeModal =()=>{
+    const closeModal = () => {
         setDeletingProduct(null);
     }
 
@@ -26,22 +26,22 @@ const MyProducts = () => {
         }
     });
 
-    if(isLoading){
+    if (isLoading) {
         return <LoadingAnimation></LoadingAnimation>
     }
 
     // Method for deleting the product
-    const handleDeleteProduct = (product) =>{
-        fetch(`http://localhost:5000/products/${product._id}`,{
-            method:"DELETE"
+    const handleDeleteProduct = (product) => {
+        fetch(`http://localhost:5000/products/${product._id}`, {
+            method: "DELETE"
         })
-        .then(res => res.json())
-        .then(result =>{
-            if(result.acknowledged){
-                toast.success('Product deleted successfully.');
-                refetch();
-            }
-        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.acknowledged) {
+                    toast.success('Product deleted successfully.');
+                    refetch();
+                }
+            })
     }
 
     return (
@@ -61,48 +61,55 @@ const MyProducts = () => {
                     </thead>
                     <tbody>
                         {
-                            products.map((product, ind) => 
-                            <tr key={ind}>
-                                <th>
-                                    {ind + 1}
-                                </th>
-                                <td>
-                                    <div className="flex items-center space-x-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src={product.productImage} alt="Avatar Tailwind CSS Component" />
+                            products.map((product, ind) =>
+                                <tr key={ind}>
+                                    <th>
+                                        {ind + 1}
+                                    </th>
+                                    <td>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={product.productImage} alt="Avatar Tailwind CSS Component" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="font-bold">{product.productName}</div>
+                                                <div className="text-sm opacity-50">{product.location}</div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div className="font-bold">{product.productName}</div>
-                                            <div className="text-sm opacity-50">{product.location}</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="text-sm"><span className='font-bold'>Orginal Price: </span>{product.originalPrice}</div>
-                                    <div className="text-sm"><span className='font-bold'>Resale Price:</span> {product.resalePrice}</div>
-                                </td>
-                                <td>{product.condition}</td>
-                                {
-                                    product.booked?
-                                    <td><p>Booked</p></td>
-                                    :
-                                    <td><p>Not Booked</p></td>
-                                }
-                                <td>
-                                    <label htmlFor="confirmation_modal" onClick={()=>setDeletingProduct(product)} className="btn bg-red-400 text-white hover:bg-red-500 btn-sm">X</label>
-                                </td>
-                            </tr>)
+                                    </td>
+                                    <td>
+                                        <div className="text-sm"><span className='font-bold'>Orginal Price: </span>{product.originalPrice}</div>
+                                        <div className="text-sm"><span className='font-bold'>Resale Price:</span> {product.resalePrice}</div>
+                                    </td>
+                                    <td>{product.condition}</td>
+                                    {
+                                        product.booked ?
+                                            <td><p>Booked</p></td>
+                                            :
+                                            <td><p>Not Booked</p></td>
+                                    }
+                                    {
+                                        product.booked ?
+                                            <td>
+                                                <label htmlFor="confirmation_modal" onClick={() => setDeletingProduct(product)} className="btn bg-red-400 text-white hover:bg-red-500 btn-sm" disabled>X</label>
+                                            </td>
+                                            :
+                                            <td>
+                                                <label htmlFor="confirmation_modal" onClick={() => setDeletingProduct(product)} className="btn bg-red-400 text-white hover:bg-red-500 btn-sm">X</label>
+                                            </td>
+                                    }
+                                </tr>)
                         }
                     </tbody>
                 </table>
             </div>
             {
-                deletingProduct && 
+                deletingProduct &&
                 <ConfirmationModal
                     title={`Want to delete ${deletingProduct.productName}?`}
-                    message ={`If you delete ${deletingProduct.productName} it cannot be undone.`}
+                    message={`If you delete ${deletingProduct.productName} it cannot be undone.`}
                     closeModal={closeModal}
                     successButtonName={"Delete"}
                     cancelButtonName={"Cancel"}
