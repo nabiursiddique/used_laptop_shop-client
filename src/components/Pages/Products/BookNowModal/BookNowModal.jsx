@@ -5,7 +5,7 @@ import PrivateRoute from '../../../../Routes/PrivateRoutes/PrivateRoute';
 const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
     const { user } = useContext(AuthContext);
 
-    const { sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription, date, time } = bookProduct;
+    const { _id, sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription, date, time } = bookProduct;
 
     return (
         <div>
@@ -16,6 +16,14 @@ const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
                         <div className="modal">
                             <div className="modal-box">
                                 <form onSubmit={handleBooking}>
+                                    <div className=" flex  font-bold my-3">
+                                        <label className="text-base bg-gradient-to-r from-sky-700  to-sky-400 text-transparent bg-clip-text mr-1"> Product Id :</label>
+                                        <input className='bg-transparent' disabled
+                                            name='productId'
+                                            defaultValue={_id}
+                                            type="text"
+                                        />
+                                    </div>
                                     <div className=" flex  font-bold my-3">
                                         <label className="text-base bg-gradient-to-r from-sky-700  to-sky-400 text-transparent bg-clip-text mr-1"> Product Name :</label>
                                         <input className='bg-transparent' disabled

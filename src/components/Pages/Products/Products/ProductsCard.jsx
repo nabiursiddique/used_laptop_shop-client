@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ProductsCard = ({ product, setBookProduct }) => {
-    const { sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription, date, time } = product;
+    const { _id, sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription, date, time } = product;
     return (
         <div className="card bg-base-100 shadow-xl border border-white">
             <figure><img className='lg:h-80 md:h-80 sm:h-auto' src={productImage} alt={category} /></figure>

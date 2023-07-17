@@ -36,6 +36,7 @@ const Products = () => {
     const handleBooking = (event) => {
         event.preventDefault();
         const form = event.target;
+        const productId = form.productId.value;
         const productName = form.productName.value;
         const sellerName = form.sellerName.value;
         const sellerEmail = form.sellerEmail.value;
@@ -47,6 +48,7 @@ const Products = () => {
         const buyerNumber = form.buyerNumber.value;
 
         const bookingInfo = {
+            productId,
             productName,
             sellerName,
             sellerEmail,
@@ -73,6 +75,22 @@ const Products = () => {
                 toast.success("Booking Successful");
             }else{
                 toast.error("Booking is not successful");
+            }
+        });
+
+
+        // updating product status to booked = true
+        fetch(`http://localhost:5000/booking/${productId}`,{
+            method:'PUT',
+            headers:{
+                "content-type":"application/json"
+            },
+            body:JSON.stringify({booked:true})
+        })
+        .then(res => res.json())
+        .then(data =>{
+            if(data.modifiedCount > 0){
+                refetch();
             }
         })
 
