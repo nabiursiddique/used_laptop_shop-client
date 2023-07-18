@@ -4,7 +4,9 @@
 ## Tech Stack
 
 **Client:** React
+
 **Server:** Node, Express
+
 **Database:** MongoDB
 
 
