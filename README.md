@@ -16,6 +16,7 @@
 - React Router DOM
 - React Hook Form
 - React Query/Tanstack Query 
+- React Stripe JS 
 - React Icon
 - React Hot Toast
 - Tailwind CSS

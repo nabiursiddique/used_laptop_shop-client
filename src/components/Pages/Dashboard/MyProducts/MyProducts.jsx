@@ -63,7 +63,7 @@ const MyProducts = () => {
                     <tbody>
                         {
                             products.map((product, ind) =>
-                                <tr key={ind}>
+                                <tr className='hover' key={ind}>
                                     <th>
                                         {ind + 1}
                                     </th>
@@ -81,8 +81,8 @@ const MyProducts = () => {
                                         </div>
                                     </td>
                                     <td>
-                                        <div className="text-sm"><span className='font-bold'>Orginal Price: </span>{product.originalPrice}</div>
-                                        <div className="text-sm"><span className='font-bold'>Resale Price:</span> {product.resalePrice}</div>
+                                        <div className="text-sm"><span className='font-bold'>Orginal Price: </span>{product.originalPrice}৳</div>
+                                        <div className="text-sm"><span className='font-bold'>Resale Price:</span> {product.resalePrice}৳</div>
                                     </td>
                                     <td>{product.condition}</td>
                                     {

@@ -16,6 +16,7 @@ import AllSellers from "../../components/Pages/Dashboard/AllSellers/AllSellers";
 import MyOrders from "../../components/Pages/Dashboard/MyOrders/MyOrders";
 import MyBuyers from "../../components/Pages/Dashboard/MyBuyers/MyBuyers";
 import ErrorPage from "../../components/Shared/ErrorPage/ErrorPage";
+import Payment from "../../components/Pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -81,6 +82,13 @@ const router = createBrowserRouter([
             {
                 path:'/dashboard/myBuyers',
                 element:<MyBuyers></MyBuyers>
+            },
+            {
+                path:'/dashboard/payment/:id',
+                element:<Payment></Payment>,
+                loader: async({params})=> {
+                   return fetch(`http://localhost:5000/booking/${params.id}`)
+                }
             }
         ]
     }
