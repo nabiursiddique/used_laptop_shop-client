@@ -30,6 +30,24 @@ const AllUsers = () => {
         return <LoadingAnimation></LoadingAnimation>
     }
 
+    // Making a user admin
+    const handleMakeAdmin = (email) => {
+        fetch(`http://localhost:5000/allUsers?email=${email}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ role: "admin" })
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.acknowledged) {
+                    toast.success("User role updated.");
+                    refetch();
+                }
+            })
+    }
+    
     // Delete user from database
     const handleDeleteUser = (allUser) => {
         fetch(`http://localhost:5000/allUsers/${allUser._id}`, {
@@ -58,6 +76,7 @@ const AllUsers = () => {
                             <th>Name</th>
                             <th>Role</th>
                             <th>Email</th>
+                            <th>Make Admin</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -76,6 +95,12 @@ const AllUsers = () => {
                                     <td>{allUser.name}</td>
                                     <td>{allUser.role}</td>
                                     <td>{allUser.email}</td>
+                                    {
+                                        allUser.role === 'Admin' ?
+                                            <td><button className='btn btn-xs bg-green-500 text-white border-none btn-outline' disabled>Make Admin</button></td>
+                                            :
+                                            <td><button onClick={() => handleMakeAdmin(allUser.email)} className='btn btn-xs bg-green-500 text-white border-none btn-outline'>Make Admin</button></td>
+                                    }
                                     <th>
                                         <label htmlFor="confirmation_modal" onClick={() => setDeletingUser(allUser)} className="btn bg-red-400 text-white btn-sm hover:bg-red-500">X</label>
                                     </th>
