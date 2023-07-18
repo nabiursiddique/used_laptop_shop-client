@@ -15,11 +15,13 @@ import AllBuyers from "../../components/Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../components/Pages/Dashboard/AllSellers/AllSellers";
 import MyOrders from "../../components/Pages/Dashboard/MyOrders/MyOrders";
 import MyBuyers from "../../components/Pages/Dashboard/MyBuyers/MyBuyers";
+import ErrorPage from "../../components/Shared/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path:'/',
         element:<MainLayout></MainLayout>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 path:'/',
@@ -46,6 +48,7 @@ const router = createBrowserRouter([
     {
         path:'/dashboard',
         element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 path:'/dashboard/profile',
