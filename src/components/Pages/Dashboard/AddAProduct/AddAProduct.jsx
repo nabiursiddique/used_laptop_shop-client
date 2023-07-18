@@ -77,6 +77,7 @@ const AddAProduct = () => {
     return (
         <div>
             <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>Add Your Product</h2>
+            <hr />
             <form className='mx-5' onSubmit={handleSubmit(handleAddProduct)}>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4'>
                     {/* Product Name */}

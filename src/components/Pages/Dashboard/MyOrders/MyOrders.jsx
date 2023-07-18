@@ -23,7 +23,7 @@ const MyOrders = () => {
     return (
         <div>
             <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>My Orders</h2>
-
+            <hr />
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
