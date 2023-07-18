@@ -17,6 +17,7 @@ import MyOrders from "../../components/Pages/Dashboard/MyOrders/MyOrders";
 import MyBuyers from "../../components/Pages/Dashboard/MyBuyers/MyBuyers";
 import ErrorPage from "../../components/Shared/ErrorPage/ErrorPage";
 import Payment from "../../components/Pages/Dashboard/Payment/Payment";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -61,7 +62,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/allUsers',
-                element:<AllUsers></AllUsers>
+                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path:'/dashboard/addAProduct',
@@ -69,11 +70,11 @@ const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/allBuyers',
-                element:<AllBuyers></AllBuyers>
+                element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
             {
                 path:'/dashboard/allSellers',
-                element:<AllSellers></AllSellers>
+                element:<AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path:'/dashboard/myOrders',
