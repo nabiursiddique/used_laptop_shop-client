@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { set, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
-import { useQuery } from 'react-query';
+import useJWTtoken from '../../../Hooks/useJWTtoken';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -14,52 +14,66 @@ const SignUp = () => {
 
     const navigate = useNavigate();
 
+    // for JWT authorization
+    const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const [token] = useJWTtoken(createdUserEmail);
+
+    if (token) {
+        navigate('/');
+    }
 
     const handleSignUp = (data) => {
-        // Image hosting
-        const image = data.image[0];
-        const formData = new FormData();
-        formData.append('image', image);
-        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-            .then((res) => res.json())
-            .then((imgData) => {
-                if (imgData.success) {
-                    // creating user with email and password
-                    setSignUpError('');
-                    createUser(data.email, data.password)
-                        .then(result => {
-                            const user = result.user;
-
-                            // Updating user name when signing up with email and password
-                            const userInfo = {
-                                displayName: data.name,
-                                photoURL: imgData.data.url
-                            }
-                            updateUser(userInfo)
-                                .then(() => { })
-                                .catch((error) => console.log(error.message));
-
-                            if (user) {
-                                saveUserToDB(data.accountType, data.name, data.email,  imgData.data.url);
-                                toast.success('Log In Successful');
+        // creating user with email and password
+        setSignUpError('');
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                const image = data.image[0];
+                const formData = new FormData();
+                formData.append('image', image);
+                const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+                fetch(url, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then((res) => res.json())
+                    .then((imgData) => {
+                        // Updating user name when signing up with email and password
+                        const userInfo = {
+                            displayName: data.name,
+                            photoURL: imgData.data.url
+                        }
+                        updateUser(userInfo)
+                            .then(() => {
+                                saveUserToDB(data.accountType, user.displayName, user.email, imgData.data.url);
+                                toast.success('Signup Successful');
                                 reset();
-                                navigate('/');
-                            }
-                        })
-                        .catch(err => {
-                            setSignUpError(err.message);
-                        });
-                }
+                            })
+                            .catch((error) => console.log(error.message));
+                    })
+                    .catch(err => {
+                        setSignUpError(err.message);
+                    });
             })
-            .catch((error)=>{
+            .catch((error) => {
                 console.log(error);
             });
+    }
 
-
+    // Google Sign Up
+    const google = () => {
+        googleSignIn()
+            .then(result => {
+                console.log(result.user);
+                const { uid, displayName, email, photoURL } = result.user;
+                if (uid) {
+                    saveUserToDB('Buyer', displayName, email, photoURL);
+                    toast.success("Sign up Successful");
+                }
+            })
+            .catch(error => {
+                setSignUpError(error.message);
+            })
     }
 
     // Saving users data into database
@@ -75,25 +89,8 @@ const SignUp = () => {
             .then(res => res.json())
             .then(data => {
                 if (data) {
-
+                    setCreatedUserEmail(email);
                 }
-            })
-    }
-
-    // Google Sign Up
-    const google = () => {
-        googleSignIn()
-            .then(result => {
-                console.log(result.user);
-                const { uid, displayName, email, photoURL } = result.user;
-                if (uid) {
-                    saveUserToDB('Buyer', displayName, email, photoURL);
-                    toast.success("Sign up Successful");
-                    navigate('/');
-                }
-            })
-            .catch(error => {
-                console.log(error.message);
             })
     }
 

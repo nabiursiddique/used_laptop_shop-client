@@ -12,7 +12,11 @@ const MyOrders = () => {
         queryKey: "productsInfo",
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`);
+                const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`,{
+                    headers:{
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
                 const data = await res.json();
                 return data;
             }
@@ -27,7 +31,7 @@ const MyOrders = () => {
     }
 
     return (
-        <div>
+        <div className='lg:w-full md:w-full sm:w-full xs-w-96'>
             <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>My Orders</h2>
             <hr />
             <div className="overflow-x-auto">

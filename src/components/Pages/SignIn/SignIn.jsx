@@ -1,19 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
+import useJWTtoken from '../../../Hooks/useJWTtoken';
 
 const SignIn = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { signIn, googleSignIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
 
-    // For private route
+    // For route after login
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+
+    // For JWT
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useJWTtoken(loginUserEmail);
+   
+    useEffect(()=>{
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    },[token,from, location,navigate]);
 
     // Sign in with email and password
     const handleSignIn = (data) => {
@@ -23,15 +34,15 @@ const SignIn = () => {
                 const user = result.user;
                 if (user) {
                     toast.success('Log In Successful');
+                    setLoginUserEmail(data.email);
                     reset();
-                    navigate(from, {replace:true});
                 }
             })
             .catch(error => {
                 const errorMessage = error.message;
                 setLoginError(errorMessage);
             })
-        
+
     }
 
     // Sign in with google
@@ -40,8 +51,8 @@ const SignIn = () => {
             .then(result => {
                 const user = result.user;
                 if (user) {
+                    setLoginUserEmail(user.email);
                     toast.success("Login successful");
-                    navigate(from, {replace:true});
                 }
             })
             .catch(error => {
@@ -77,7 +88,7 @@ const SignIn = () => {
                     </div>
                     <input value='Sign In' className='btn w-full my-4 bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500' type="submit" />
                 </form>
-                <p className='text-sm text-center'>New to <span className='text-blue-500'>AAA</span> Technology? <Link className='text-blue-400' to='/signUP'>Sign Up</Link> </p>
+                <p className='text-sm text-center'>New to <span className='text-blue-500'>AAA</span> Technology? <Link className='text-blue-400' to='/signUp'>Sign Up</Link> </p>
                 <div className="divider">OR</div>
                 <button onClick={google} className='btn btn-outline w-full'><span className='text-blue-400 text-xl'><FaGoogle /></span>GOOGLE</button>
             </div>
