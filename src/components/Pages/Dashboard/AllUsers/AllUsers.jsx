@@ -16,7 +16,11 @@ const AllUsers = () => {
         queryKey: ["allUser"],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/allUsers');
+                const res = await fetch('http://localhost:5000/allUsers',{
+                    headers:{
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
                 const data = await res.json()
                 return data;
             }

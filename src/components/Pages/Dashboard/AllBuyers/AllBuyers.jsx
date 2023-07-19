@@ -16,7 +16,11 @@ const AllBuyers = () => {
         queryKey: ["buyer"],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/allBuyers?role=Buyer');
+                const res = await fetch('http://localhost:5000/allBuyers?role=Buyer',{
+                    headers:{
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
                 const data = await res.json();
                 return data;
             }

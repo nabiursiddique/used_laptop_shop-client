@@ -86,7 +86,7 @@ const CheckoutForm = ({ productInfo }) => {
             .then(data =>{
                 if(data.insertedId){
                     toast.success("Your payment is successful");
-                    setSuccess('Congrats! your payment completed');
+                    setSuccess('Congrats! your payment is completed');
                     setTransactionId(paymentIntent.id);
                 }
             })
@@ -102,9 +102,9 @@ const CheckoutForm = ({ productInfo }) => {
                         style: {
                             base: {
                                 fontSize: '16px',
-                                color: '#424770',
+                                color: '#3f70bf',
                                 '::placeholder': {
-                                    color: '#aab7c4',
+                                    color: '#4882e0',
                                 },
                             },
                             invalid: {
@@ -113,7 +113,7 @@ const CheckoutForm = ({ productInfo }) => {
                         },
                     }}
                 />
-                <button className='btn btn-info btn-sm mt-5' type="submit" 
+                <button className='btn bg-sky-400 btn-sm mt-5 hover:bg-blue-400 text-white' type="submit" 
                 disabled={!stripe || !clientSecret || processing}>
                     Pay
                 </button>
@@ -121,7 +121,7 @@ const CheckoutForm = ({ productInfo }) => {
             <p className="text-red-500">{cardError}</p>
             {
                 success && <div> 
-                    <p className='text-green-500'>{success}</p>
+                    <p className='text-green-500 mt-5'>{success}</p>
                 </div>
             }
         </>

@@ -6,7 +6,11 @@ const useUserRole =(email)=>{
 
     useEffect(()=>{
         if(email){
-            fetch(`http://localhost:5000/allUsersRole?email=${email}`)
+            fetch(`http://localhost:5000/allUsersRole?email=${email}`,{
+                headers:{
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             .then(res => res.json())
             .then(data =>{
                 if(data){

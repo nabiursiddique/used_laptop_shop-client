@@ -31,7 +31,7 @@ const MyOrders = () => {
     }
 
     return (
-        <div className='lg:w-full md:w-full sm:w-full xs-w-96'>
+        <div>
             <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>My Orders</h2>
             <hr />
             <div className="overflow-x-auto">
