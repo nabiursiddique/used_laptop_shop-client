@@ -15,19 +15,20 @@
 - React
 - React Router DOM
 - React Hook Form
-- React Custom Hook 
 - React Query/Tanstack Query 
 - React Stripe JS (payment system)
-- React Icon
-- React Hot Toast
-- Tailwind CSS
-- Tailwind CSS Animatied
-- Daisy UI
-- Date fns
+- React Custom Hook 
 - Firebase Authentication
-- Dotenv
-- Image hosting api
 - JWT (JSONWebToken)
+- Image hosting api
+- Tailwind CSS
+- Daisy UI
+- Dotenv
+- Date fns
+- Swiper JS
+- React Hot Toast
+- Tailwind CSS Animatied
+- React Icon
 
 
 ## Features
