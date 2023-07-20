@@ -16,7 +16,7 @@ const AddAProduct = () => {
     const date = format(currentDate, 'PP');
     const time = format(currentDate, 'hh:mm:ss a');
 
-    const category = ["Apple", "Samsung", "Dell", "HP", "Lenovo"];
+    const category = ["Apple", "Samsung", "Dell", "HP", "Lenovo", "Microsoft", "Huawei"];
 
     const handleAddProduct = (data) => {
         // Image hosting

@@ -101,7 +101,7 @@ const Products = () => {
     return (
         <div>
             <div>
-                <h1 className='text-3xl text-center my-6 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>All Products</h1>
+                <h1 className='text-4xl text-center my-6 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>All Products</h1>
                 {
                     products.length > 0 ?
                         <div className='m-6 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-5 my-10'>

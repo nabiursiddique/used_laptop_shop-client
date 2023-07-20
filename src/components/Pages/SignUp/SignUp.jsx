@@ -78,7 +78,7 @@ const SignUp = () => {
 
     // Saving users data into database
     const saveUserToDB = (role, name, email, imageURL) => {
-        const user = { role, name, email, imageURL }
+        const user = { role, name, email, imageURL, verified: false }
         fetch('http://localhost:5000/allUsers', {
             method: 'POST',
             headers: {

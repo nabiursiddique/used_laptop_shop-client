@@ -29,8 +29,8 @@ const InfoCards = () => {
         }
     ]
     return (
-        <div className='my-16'>
-        <h2 className='text-5xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>Our Services </h2>
+        <div className='my-12'>
+        <h2 className='text-5xl text-center my-5 bg-gradient-to-r from-sky-700  to-white text-transparent bg-clip-text font-extrabold'>Our Services </h2>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 mx-5 my-6 text-white'>
             {
                 cardData.map(card => <InfoCard key={card.id} card={card}></InfoCard>)

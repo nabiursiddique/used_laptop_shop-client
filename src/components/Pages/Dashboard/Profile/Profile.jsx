@@ -30,7 +30,7 @@ const Profile = () => {
     return (
         <div>
             <div className='h-screen flex justify-center items-center'>
-                <div className="card card-compact max-w-96 bg-base-100 shadow-xl border border-blue-200 py-7"  data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000" >
+                <div className="card card-compact max-w-96 bg-base-100 shadow-xl border border-blue-200 py-7"  data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-once="true" data-aos-duration="1000" >
                     <div className="avatar flex justify-center">
                         <div className="w-40 rounded-full ring ring-blue-400 ring-offset-base-100 ring-offset-2">
                             <img src={user.photoURL} />

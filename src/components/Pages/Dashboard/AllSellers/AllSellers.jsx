@@ -3,6 +3,7 @@ import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationMod
 import { useQuery } from 'react-query';
 import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
 import { toast } from 'react-hot-toast';
+import greenTick from '../../../../assets/Icon/Green Tick.svg';
 
 const AllSellers = () => {
     const [deletingUser, setDeletingUser] = useState(null);
@@ -29,6 +30,27 @@ const AllSellers = () => {
             }
         }
     });
+
+
+    // Verifying a seller
+    const handleVerifySeller = (email) => {
+        fetch(`http://localhost:5000/verifySeller?email=${email}`,{
+            method:'PATCH',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify({verified: true})
+        })
+        .then(res => res.json())
+        .then(data =>{
+            if(data.acknowledged){
+                toast.success("Verified");
+                refetch();
+            }
+        })
+    }
+
+
 
     // Delete user from database (This option will be only for admin role)
     const handleDeleteUser = (seller) => {
@@ -60,6 +82,7 @@ const AllSellers = () => {
                             <th>Name</th>
                             <th>Role</th>
                             <th>Email</th>
+                            <th>Verify</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -78,6 +101,19 @@ const AllSellers = () => {
                                     <td>{seller.name}</td>
                                     <td>{seller.role}</td>
                                     <td>{seller.email}</td>
+                                    <td>
+                                        {
+                                            seller.verified ?
+                                                <td className='p-0'>
+                                                    <div>
+                                                    <img className='w-1/3' src={greenTick} alt="" />
+                                                    </div>
+                                                    <p className='text-green-500'>Verified</p>
+                                                </td>
+                                                :
+                                                <td className='p-0'><button onClick={() => handleVerifySeller(seller.email)} className='btn btn-xs bg-green-500 text-white border-none '>Verify</button></td>
+                                        }
+                                    </td>
                                     <th>
                                         <label htmlFor="confirmation_modal" onClick={() => setDeletingUser(seller)} className="btn bg-red-400 text-white btn-sm hover:bg-red-500">X</label>
                                     </th>
