@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const ProductsCard = ({ product, setBookProduct }) => {
-    const { sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, productDescription, date, time, booked } = product;
+    // for scroll animation
+    useEffect(()=>{
+        AOS.init();
+    },[]);
+    const { sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, date, time, booked } = product;
     return (
-        <div className="card bg-base-100 shadow-xl border border-white">
+        <div className="card bg-base-100 shadow-xl border border-white" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000" data-aos-once="true">
             <figure><img className='lg:h-80 md:h-80 sm:h-auto' src={productImage} alt={category} /></figure>
             <div className="card-body">
                 <div className='flex items-center'>

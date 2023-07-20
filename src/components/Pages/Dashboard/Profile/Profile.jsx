@@ -1,11 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
 import useUserRole from '../../../../Hooks/useUserRole';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Profile = () => {
-    const { user, logOut } = useContext(AuthContext);    
+    const { user, logOut } = useContext(AuthContext);
     const [role] = useUserRole(user?.email);
+
+    // for scroll animation
+    useEffect(() => {
+        AOS.init();
+    }, [])
 
     // For logout
     const handleLogout = () => {
@@ -23,7 +30,7 @@ const Profile = () => {
     return (
         <div>
             <div className='h-screen flex justify-center items-center'>
-                <div className="card card-compact max-w-96 bg-base-100 shadow-xl border border-blue-200 py-7">
+                <div className="card card-compact max-w-96 bg-base-100 shadow-xl border border-blue-200 py-7"  data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000" >
                     <div className="avatar flex justify-center">
                         <div className="w-40 rounded-full ring ring-blue-400 ring-offset-base-100 ring-offset-2">
                             <img src={user.photoURL} />

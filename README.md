@@ -28,6 +28,7 @@
 - Swiper JS
 - React Hot Toast
 - Tailwind CSS Animatied
+- AOS animation
 - React Icon
 
 

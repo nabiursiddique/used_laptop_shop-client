@@ -51,6 +51,7 @@ const SwiperSlider = () => {
                 spaceBetween={50}
                 slidesPerView={1}
                 autoplay
+                loop={true}
                 effect="fade"
                 pagination={{ clickable: true }}
             >
