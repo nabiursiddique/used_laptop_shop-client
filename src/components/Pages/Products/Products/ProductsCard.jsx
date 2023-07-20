@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import useSellerVerify from '../../../../Hooks/useSellerverify';
 import blueTick from '../../../../assets/Icon/badge.png';
+import { AuthContext } from '../../../../Contexts/AuthProvider';
 
 const ProductsCard = ({ product, setBookProduct }) => {
+    const {user} = useContext(AuthContext);
     // for scroll animation
     useEffect(() => {
         AOS.init();
@@ -46,7 +48,12 @@ const ProductsCard = ({ product, setBookProduct }) => {
                 <h4><span className='font-bold'>Orginal Price:</span> {originalPrice}৳ </h4>
                 <h4><span className='font-bold'>Resale Price:</span> {resalePrice}৳</h4>
                 <div className="card-actions">
-                    <label onClick={() => setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Book Now</label>
+                   { 
+                   user?.email === email ?
+                   <label onClick={() => setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full' disabled>Book Now</label>
+                   :
+                   <label onClick={() => setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Book Now</label>
+                   }
                 </div>
             </div>
         </div>
