@@ -1,23 +1,39 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import useSellerVerify from '../../../../Hooks/useSellerverify';
+import blueTick from '../../../../assets/Icon/badge.png';
 
 const ProductsCard = ({ product, setBookProduct }) => {
     // for scroll animation
-    useEffect(()=>{
+    useEffect(() => {
         AOS.init();
-    },[]);
-    const { sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, date, time, booked } = product;
+    }, []);
+    const { sellerName, sellerImage, email, productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productImage, date, time } = product;
+    const [verified] = useSellerVerify(email);
+
     return (
         <div className="card bg-base-100 shadow-xl border border-white" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000" data-aos-once="true">
             <figure><img className='lg:h-80 md:h-80 sm:h-auto' src={productImage} alt={category} /></figure>
             <div className="card-body">
                 <div className='flex items-center'>
-                    <div className="avatar">
-                        <div className="w-10 rounded-full">
-                            <img src={sellerImage} />
-                        </div>
-                    </div>
+                    {
+                        verified ?
+                            <div className="avatar ">
+                                <div className='absolute w-2/5 left-8 bottom-7'>
+                                <img src={blueTick} alt="" />
+                                </div>
+                                <div className="w-12 rounded-full">
+                                    <img src={sellerImage} />
+                                </div>
+                            </div>
+                            :
+                            <div className="avatar">
+                                <div className="w-10 rounded-full">
+                                    <img src={sellerImage} />
+                                </div>
+                            </div>
+                    }
                     <h3 className='ml-3 font-bold'>{sellerName}</h3>
                 </div>
                 <p className='text-xs'><span className='font-bold'>Posted on:</span> <span className='font-bold text-blue-600'>{date}</span>  {time}</p>
