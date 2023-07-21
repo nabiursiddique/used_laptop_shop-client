@@ -55,8 +55,8 @@ const SwiperSlider = () => {
                 effect="fade"
                 pagination={{ clickable: true }}
             >
-                {data.map((item) => (
-                    <SwiperSlide >
+                {data.map((item,ind) => (
+                    <SwiperSlide key={ind}>
                         <div className='lg:h-screen sm:h-auto'>
                             <div className='sliderImage'>
                                 <img src={item.image} alt="" />
