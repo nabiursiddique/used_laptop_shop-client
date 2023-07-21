@@ -106,7 +106,7 @@ const Products = () => {
                 <form className='flex lg:justify-end justify-center lg:mr-6'>
                     <div className="form-control w-full max-w-xs">
                         <input
-                            onChange={(e) => setSearch(e.target.value)}
+                            onChange={(e) => setSearch(e.target.value.toLowerCase())}
                             type="text"
                             placeholder="Search Product"
                             className="input input-bordered w-full max-w-xs"
@@ -118,7 +118,7 @@ const Products = () => {
                         <div className='m-6 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-5 my-10'>
                             {
                                 products.filter((product) => {
-                                    return search.toLowerCase() === '' ?
+                                    return search === '' ?
                                         product
                                         :
                                         product.productName.toLowerCase().includes(search)
@@ -126,7 +126,8 @@ const Products = () => {
                                     key={ind}
                                     product={product}
                                     setBookProduct={setBookProduct}
-                                ></ProductsCard>)
+                                ></ProductsCard>
+                                )
                             }
                         </div>
                         :
