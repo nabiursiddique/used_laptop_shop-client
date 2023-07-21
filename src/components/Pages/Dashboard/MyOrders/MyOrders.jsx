@@ -27,7 +27,7 @@ const MyOrders = () => {
     })
 
     if (isLoading) {
-        <LoadingAnimation></LoadingAnimation>
+       return <LoadingAnimation></LoadingAnimation>;
     }
 
     return (
