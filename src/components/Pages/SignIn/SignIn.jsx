@@ -49,14 +49,32 @@ const SignIn = () => {
     const google = () => {
         googleSignIn()
             .then(result => {
-                const user = result.user;
-                if (user) {
-                    setLoginUserEmail(user.email);
-                    toast.success("Login successful");
+                const { uid, displayName, email, photoURL } = result.user;
+                if (uid) {
+                    saveUserToDB('Buyer', displayName, email, photoURL);
+                    toast.success("Sign up Successful");
                 }
             })
             .catch(error => {
                 console.error(error);
+            })
+    }
+
+    // Saving users data into database
+    const saveUserToDB = (role, name, email, imageURL) => {
+        const user = { role, name, email, imageURL, verified: false }
+        fetch('http://localhost:5000/allUsers', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    setLoginUserEmail(email);
+                }
             })
     }
 
