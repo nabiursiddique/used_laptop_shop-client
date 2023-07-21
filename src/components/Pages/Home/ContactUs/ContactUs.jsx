@@ -20,8 +20,9 @@ const ContactUs = () => {
     return (
         <div className='flex justify-center items-center my-10 mx-5'>
            <div className='grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 lg:gap-8 md:gap-5 gap-3'>
-           <h2 className=' flex  justify-center items-center text-center lg:text-8xl md:text-6xl text-5xl mt-5 bg-gradient-to-r from-blue-700  to-blue-200 text-transparent bg-clip-text font-extrabold'  data-aos="fade-down" data-aos-delay="200" data-aos-duration="1000" data-aos-once="false">Contact Us</h2>
-            <div className=' p-7 my-7 shadow-lg border border-white rounded-lg'>
+           <h2 className=' flex  justify-center items-center text-center lg:text-8xl md:text-6xl text-5xl mt-5 bg-gradient-to-r from-blue-700  to-blue-200 text-transparent bg-clip-text font-extrabold'  data-aos="fade-down" data-aos-delay="200" data-aos-duration="3000" data-aos-once="false">Contact Us</h2>
+            <div className='lg:mx-10 p-7 my-7 shadow-lg border border-white rounded-lg'>
+                <h1 className='text-2xl bg-gradient-to-r from-blue-700  to-blue-200 text-transparent bg-clip-text font-extrabold text-center py-5'>Your Qustions & Feedback</h1>
                 <form onSubmit={handleSubmit(handleContactUs)}>
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Name</span></label>

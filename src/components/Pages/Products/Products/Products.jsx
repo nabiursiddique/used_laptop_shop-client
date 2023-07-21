@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 
 const Products = () => {
     const [bookProduct, setBookProduct] = useState(null);
+    const [search, setSearch] = useState('');
 
     // React query for fetching
     const { data: products = [], refetch, isLoading } = useQuery({
@@ -27,8 +28,8 @@ const Products = () => {
         return <LoadingAnimation></LoadingAnimation>
     }
 
-     //booking modal close handle
-     const closeModal = () => {
+    //booking modal close handle
+    const closeModal = () => {
         setBookProduct(null);
     }
 
@@ -62,51 +63,66 @@ const Products = () => {
         setBookProduct(null);
 
         // saving booking information in the db
-        fetch('http://localhost:5000/booking',{
-            method:'POST',
-            headers:{
-                'content-type':'application/json'
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
             },
-            body:JSON.stringify(bookingInfo)
+            body: JSON.stringify(bookingInfo)
         })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.acknowledged){
-                toast.success("Booking Successful");
-            }else{
-                toast.error("Booking is not successful");
-            }
-        });
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success("Booking Successful");
+                } else {
+                    toast.error("Booking is not successful");
+                }
+            });
 
 
         // updating product status to booked = true
-        fetch(`http://localhost:5000/booking/${productId}`,{
-            method:'PUT',
-            headers:{
-                "content-type":"application/json"
+        fetch(`http://localhost:5000/booking/${productId}`, {
+            method: 'PUT',
+            headers: {
+                "content-type": "application/json"
             },
-            body:JSON.stringify({booked:true})
+            body: JSON.stringify({ booked: true })
         })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.modifiedCount > 0){
-                refetch();
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    refetch();
+                }
+            })
 
         form.reset();
     }
-
 
     return (
         <div>
             <div>
                 <h1 className='text-4xl text-center my-6 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>All Products</h1>
+                {/* Search products bar */}
+                <form className='flex lg:justify-end justify-center lg:mr-6'>
+                    <div className="form-control w-full max-w-xs">
+                        <input
+                            onChange={(e) => setSearch(e.target.value)}
+                            type="text"
+                            placeholder="Search Product"
+                            className="input input-bordered w-full max-w-xs"
+                        />
+                    </div>
+                </form>
                 {
                     products.length > 0 ?
                         <div className='m-6 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-5 my-10'>
                             {
-                                products.map((product, ind) => <ProductsCard
+                                products.filter((product) => {
+                                    return search.toLowerCase() === '' ?
+                                        product
+                                        :
+                                        product.productName.toLowerCase().includes(search)
+                                }).map((product, ind) => <ProductsCard
                                     key={ind}
                                     product={product}
                                     setBookProduct={setBookProduct}
