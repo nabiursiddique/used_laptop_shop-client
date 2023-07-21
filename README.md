@@ -32,15 +32,23 @@
 - React Icon
 
 
-## Features
-- Creating/Sign up a user
-- Sign In a user and Signout a user
-- Admin can make other users admin 
-- Admin can delete other user
-- Seller can add their product 
-- Buyer can book a product
-- After booking buyer can pay the price with the payment system
-- Secured API's with jwt
+## Functionality / Features
+- Creating/Sign up a user.
+- Sign In a user and Signout a user.(user authentication)
+- Admin can make other users admin.(Admin Role)
+- Admin can delete users (buyer/seller).
+- Admin can verify sellers.
+- A green tick mark will show besides the verified sellers image.
+- Seller can add their product.
+- Seller can delete their product.
+- Seller can't their own product but they can buy product from other sellers. 
+- Buyer can book a product.
+- After booking a product buyer can pay the price with the integrated payment system.(stripe)
+- Secured API's with jwt.
+- Users can contact us via contact from.
+- Dynamic dashboard with different options for buyer, seller and admin.
+- Light and Dark mode throughout the website.
+
 
 
 

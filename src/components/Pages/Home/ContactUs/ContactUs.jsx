@@ -2,6 +2,7 @@ import Aos from 'aos';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import 'aos/dist/aos.css';
 
 const ContactUs = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -19,7 +20,7 @@ const ContactUs = () => {
     return (
         <div className='flex justify-center items-center my-10 mx-5'>
            <div className='grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 lg:gap-8 md:gap-5 gap-3'>
-           <h2 className=' flex  justify-center items-center text-center lg:text-8xl md:text-6xl text-5xl mt-5 bg-gradient-to-r from-blue-700  to-blue-200 text-transparent bg-clip-text font-extrabold'  data-aos="fade-down"  data-aos-duration="1000" data-aos-once="false">Contact Us</h2>
+           <h2 className=' flex  justify-center items-center text-center lg:text-8xl md:text-6xl text-5xl mt-5 bg-gradient-to-r from-blue-700  to-blue-200 text-transparent bg-clip-text font-extrabold'  data-aos="fade-down" data-aos-delay="200" data-aos-duration="1000" data-aos-once="false">Contact Us</h2>
             <div className=' p-7 my-7 shadow-lg border border-white rounded-lg'>
                 <form onSubmit={handleSubmit(handleContactUs)}>
                     <div className="form-control w-full">
