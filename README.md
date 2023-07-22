@@ -1,21 +1,21 @@
-﻿<h1 style="font-size: 40px;"> <span style='color: #FFA500;text-transform: uppercase'>Used Laptop Shop</span> (With Dynamic Admin Panel) </h1>
+﻿<h1> <span>Used Laptop Shop</span> (With Dynamic Admin Panel) </h1>
 
 
-<h2 style='text-transform: uppercase'><span style="color: orange">-></span>  Admin Log In Info</h2>
-<ul style="list-style-type:square">
-<li style="font-size: 16px"><span style="color: skyblue; font-size: 17px">Email:</span> admin@admin.com</li>
-<li style="font-size: 16px"><span style="color: skyblue; font-size: 17px">Password:</span> Admin@123</li>
+<h2><span>-></span>  Admin Log In Info</h2>
+<ul>
+<li><span>Email:</span> admin@admin.com</li>
+<li><span>Password:</span> Admin@123</li>
 </ul>
 
-<h2 style='text-transform: uppercase'><span style="color: orange">-></span>  Tech Stack</h2>
-<ul style="list-style-type:square">
-<li><span style="color: skyblue; font-size: 17px">Client:</span> React</li> 
-<li><span style="color: skyblue; font-size: 17px">Server:</span> Node, Express</li> 
-<li><span style="color: skyblue; font-size: 17px">Database:</span> MongoDB</li>
+<h2><span>-></span>  Tech Stack</h2>
+<ul>
+<li><span>Client:</span> React</li> 
+<li><span>Server:</span> Node, Express</li> 
+<li><span>Database:</span> MongoDB</li>
 </ul>
 
-<h2 style='text-transform: uppercase'><span style="color: orange">-></span>  Technology Used</h2>
-<ul style="list-style-type:square">
+<h2><span>-></span>  Technology Used</h2>
+<ul>
     <li>React</li>
     <li>React Router DOM</li>
     <li>React Hook Form</li>
@@ -39,8 +39,8 @@
 
 
 
-<h2 style='text-transform: uppercase'><span style="color: orange">-></span>  Functionality / Features</h2>
-<ul style="list-style-type:square">
+<h2><span>-></span>  Functionality / Features</h2>
+<ul>
 <li>Creating/Sign up a user.</li>
 <li>Sign In a user and Signout a user.(user authentication)</li>
 <li>Admin can make other users admin.(Admin Role)</li>
