@@ -1,4 +1,4 @@
-﻿<h1> <span>Used Laptop Shop</span> (With Dynamic Admin Panel) </h1>
+<h1> <span>Used Laptop Shop</span> (With Dynamic Admin Panel) </h1>
 
 
 <h2><span>-></span>  Admin Log In Info</h2>
