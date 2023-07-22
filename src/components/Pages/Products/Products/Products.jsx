@@ -4,10 +4,12 @@ import ProductsCard from './ProductsCard';
 import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
 import BookNowModal from '../BookNowModal/BookNowModal';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
     const [bookProduct, setBookProduct] = useState(null);
     const [search, setSearch] = useState('');
+    const navigate = useNavigate();
 
     // React query for fetching
     const { data: products = [], refetch, isLoading } = useQuery({
@@ -74,6 +76,7 @@ const Products = () => {
             .then(data => {
                 if (data.acknowledged) {
                     toast.success("Booking Successful");
+                    navigate('/dashboard/myOrders');
                 } else {
                     toast.error("Booking is not successful");
                 }
