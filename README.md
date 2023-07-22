@@ -1,4 +1,4 @@
-﻿<h1 style="font-size: 40px;"> <span style='color: #FFA500;text-transform: uppercase'>Used Laptop Shop</span> (With Dynamic Admin Panel) </h1>
+﻿<h1> <span style='color:#FFA500; text-transform: uppercase'>Used Laptop Shop</span> (With Dynamic Admin Panel) </h1>
 
 
 <h2 style='text-transform: uppercase'><span style="color: orange">-></span>  Admin Log In Info</h2>
