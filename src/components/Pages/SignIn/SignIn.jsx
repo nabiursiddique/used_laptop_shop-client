@@ -52,7 +52,7 @@ const SignIn = () => {
                 const { uid, displayName, email, photoURL } = result.user;
                 if (uid) {
                     saveUserToDB('Buyer', displayName, email, photoURL);
-                    toast.success("Sign up Successful");
+                    toast.success("Sign In Successful");
                 }
             })
             .catch(error => {
