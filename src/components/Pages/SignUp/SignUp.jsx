@@ -64,7 +64,6 @@ const SignUp = () => {
     const google = () => {
         googleSignIn()
             .then(result => {
-                console.log(result.user);
                 const { uid, displayName, email, photoURL } = result.user;
                 if (uid) {
                     saveUserToDB('Buyer', displayName, email, photoURL);

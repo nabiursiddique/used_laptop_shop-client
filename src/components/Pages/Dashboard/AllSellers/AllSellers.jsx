@@ -17,8 +17,8 @@ const AllSellers = () => {
         queryKey: ["sellers"],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/allSellers?role=Seller',{
-                    headers:{
+                const res = await fetch('http://localhost:5000/allSellers?role=Seller', {
+                    headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
                 });
@@ -34,20 +34,20 @@ const AllSellers = () => {
 
     // Verifying a seller
     const handleVerifySeller = (email) => {
-        fetch(`http://localhost:5000/verifySeller?email=${email}`,{
-            method:'PATCH',
-            headers:{
-                'content-type':'application/json'
+        fetch(`http://localhost:5000/verifySeller?email=${email}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
             },
-            body:JSON.stringify({verified: true})
+            body: JSON.stringify({ verified: true })
         })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.acknowledged){
-                toast.success("Verified");
-                refetch();
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success("Verified");
+                    refetch();
+                }
+            })
     }
 
 
@@ -101,19 +101,17 @@ const AllSellers = () => {
                                     <td>{seller.name}</td>
                                     <td>{seller.role}</td>
                                     <td>{seller.email}</td>
-                                    <td>
-                                        {
-                                            seller.verified ?
-                                                <td className='p-0'>
-                                                    <div>
+                                    {
+                                        seller.verified ?
+                                            <td className='p-0'>
+                                                <div>
                                                     <img className='w-1/3' src={greenTick} alt="" />
-                                                    </div>
-                                                    <p className='text-green-500'>Verified</p>
-                                                </td>
-                                                :
-                                                <td className='p-0'><button onClick={() => handleVerifySeller(seller.email)} className='btn btn-xs bg-green-500 text-white border-none '>Verify</button></td>
-                                        }
-                                    </td>
+                                                </div>
+                                                <p className='text-green-500'>Verified</p>
+                                            </td>
+                                            :
+                                            <td className='p-0'><button onClick={() => handleVerifySeller(seller.email)} className='btn btn-xs bg-green-500 text-white border-none '>Verify</button></td>
+                                    }
                                     <th>
                                         <label htmlFor="confirmation_modal" onClick={() => setDeletingUser(seller)} className="btn bg-red-400 text-white btn-sm hover:bg-red-500">X</label>
                                     </th>
