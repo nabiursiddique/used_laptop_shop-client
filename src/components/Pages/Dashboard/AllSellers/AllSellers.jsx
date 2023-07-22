@@ -17,7 +17,7 @@ const AllSellers = () => {
         queryKey: ["sellers"],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/allSellers?role=Seller', {
+                const res = await fetch('https://used-laptop-shop-server.vercel.app/allSellers?role=Seller', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -34,7 +34,7 @@ const AllSellers = () => {
 
     // Verifying a seller
     const handleVerifySeller = (email) => {
-        fetch(`http://localhost:5000/verifySeller?email=${email}`, {
+        fetch(`https://used-laptop-shop-server.vercel.app/verifySeller?email=${email}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -54,7 +54,7 @@ const AllSellers = () => {
 
     // Delete user from database (This option will be only for admin role)
     const handleDeleteUser = (seller) => {
-        fetch(`http://localhost:5000/allUsers/${seller._id}`, {
+        fetch(`https://used-laptop-shop-server.vercel.app/allUsers/${seller._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

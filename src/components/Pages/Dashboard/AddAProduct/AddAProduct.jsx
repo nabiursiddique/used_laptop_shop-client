@@ -52,7 +52,7 @@ const AddAProduct = () => {
                 }
         
                 // Sending the product information to the database
-                fetch('http://localhost:5000/product', {
+                fetch('https://used-laptop-shop-server.vercel.app/product', {
                     method: "POST",
                     headers: {
                         "content-type": "application/json"

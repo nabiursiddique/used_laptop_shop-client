@@ -63,7 +63,7 @@ const SignIn = () => {
     // Saving users data into database
     const saveUserToDB = (role, name, email, imageURL) => {
         const user = { role, name, email, imageURL, verified: false }
-        fetch('http://localhost:5000/allUsers', {
+        fetch('https://used-laptop-shop-server.vercel.app/allUsers', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

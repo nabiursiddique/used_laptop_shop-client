@@ -16,7 +16,7 @@ const Products = () => {
         queryKey: ['products'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/products');
+                const res = await fetch('https://used-laptop-shop-server.vercel.app/products');
                 const data = await res.json();
                 return data;
             }
@@ -65,7 +65,7 @@ const Products = () => {
         setBookProduct(null);
 
         // saving booking information in the db
-        fetch('http://localhost:5000/booking', {
+        fetch('https://used-laptop-shop-server.vercel.app/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -84,7 +84,7 @@ const Products = () => {
 
 
         // updating product status to booked = true
-        fetch(`http://localhost:5000/booking/${productId}`, {
+        fetch(`https://used-laptop-shop-server.vercel.app/booking/${productId}`, {
             method: 'PUT',
             headers: {
                 "content-type": "application/json"

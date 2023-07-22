@@ -16,7 +16,7 @@ const AllBuyers = () => {
         queryKey: ["buyer"],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/allBuyers?role=Buyer',{
+                const res = await fetch('https://used-laptop-shop-server.vercel.app/allBuyers?role=Buyer',{
                     headers:{
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -32,7 +32,7 @@ const AllBuyers = () => {
 
     // Delete user from database (This option will be only for admin role)
     const handleDeleteUser = (buyer) => {
-        fetch(`http://localhost:5000/allUsers/${buyer._id}`, {
+        fetch(`https://used-laptop-shop-server.vercel.app/allUsers/${buyer._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

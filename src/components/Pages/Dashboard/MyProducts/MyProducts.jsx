@@ -17,7 +17,7 @@ const MyProducts = () => {
         queryKey: 'products',
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/userProducts?email=${user.email}`,{
+                const res = await fetch(`https://used-laptop-shop-server.vercel.app/userProducts?email=${user.email}`,{
                     headers:{
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -36,7 +36,7 @@ const MyProducts = () => {
 
     // Method for deleting the product
     const handleDeleteProduct = (product) => {
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`https://used-laptop-shop-server.vercel.app/products/${product._id}`, {
             method: "DELETE"
         })
             .then(res => res.json())

@@ -6,7 +6,7 @@ const useSellerVerify=(email)=>{
 
     useEffect(()=>{
         if(email){
-            fetch(`http://localhost:5000/verifiedUsers?email=${email}`,{
+            fetch(`https://used-laptop-shop-server.vercel.app/verifiedUsers?email=${email}`,{
                 headers:{
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }

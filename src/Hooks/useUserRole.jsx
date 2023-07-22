@@ -6,7 +6,7 @@ const useUserRole =(email)=>{
 
     useEffect(()=>{
         if(email){
-            fetch(`http://localhost:5000/allUsersRole?email=${email}`,{
+            fetch(`https://used-laptop-shop-server.vercel.app/allUsersRole?email=${email}`,{
                 headers:{
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }

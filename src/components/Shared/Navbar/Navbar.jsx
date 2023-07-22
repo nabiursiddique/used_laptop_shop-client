@@ -68,7 +68,7 @@ const Navbar = () => {
             {menu}
           </ul>
         </div>
-        <Link to='/' className="btn btn-ghost normal-case lg:text-2xl md:text-xl sm:text-xs bg-gradient-to-r from-sky-700  to-sky-400 text-transparent bg-clip-text">AAA Technology</Link>
+        <Link to='/' className="btn btn-ghost normal-case lg:text-2xl md:text-xl sm:text-xs bg-gradient-to-r from-sky-700  to-sky-400 text-transparent bg-clip-text font-bold">AAA TECNOLOGY</Link>
       </div>
 
       <div className="navbar-center">

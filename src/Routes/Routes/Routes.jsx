@@ -88,7 +88,7 @@ const router = createBrowserRouter([
                 path:'/dashboard/payment/:id',
                 element:<Payment></Payment>,
                 loader: async({params})=> {
-                   return fetch(`http://localhost:5000/booking/${params.id}`)
+                   return fetch(`https://used-laptop-shop-server.vercel.app/booking/${params.id}`)
                 }
             }
         ]

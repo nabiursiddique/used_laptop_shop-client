@@ -16,7 +16,7 @@ const AllUsers = () => {
         queryKey: ["allUser"],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/allUsers',{
+                const res = await fetch('https://used-laptop-shop-server.vercel.app/allUsers',{
                     headers:{
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -36,7 +36,7 @@ const AllUsers = () => {
 
     // Making a user admin
     const handleMakeAdmin = (email) => {
-        fetch(`http://localhost:5000/allUsers?email=${email}`, {
+        fetch(`https://used-laptop-shop-server.vercel.app/allUsers?email=${email}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -54,7 +54,7 @@ const AllUsers = () => {
     
     // Delete user from database
     const handleDeleteUser = (allUser) => {
-        fetch(`http://localhost:5000/allUsers/${allUser._id}`, {
+        fetch(`https://used-laptop-shop-server.vercel.app/allUsers/${allUser._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
