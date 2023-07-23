@@ -26,9 +26,7 @@ const Products = () => {
         }
     })
 
-    if (isLoading) {
-        return <LoadingAnimation></LoadingAnimation>
-    }
+    
 
     //booking modal close handle
     const closeModal = () => {
@@ -76,6 +74,7 @@ const Products = () => {
             .then(data => {
                 if (data.acknowledged) {
                     toast.success("Booking Successful");
+                    refetch();
                     navigate('/dashboard/myOrders');
                 } else {
                     toast.error("Booking is not successful");
@@ -99,6 +98,10 @@ const Products = () => {
             })
 
         form.reset();
+    }
+
+    if (isLoading) {
+        return <LoadingAnimation></LoadingAnimation>
     }
 
     return (
