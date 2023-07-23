@@ -34,6 +34,8 @@ const MyOrders = () => {
         <div>
             <h2 className='text-4xl text-center my-5 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>My Orders</h2>
             <hr />
+            {
+                productsInfo.length > 0 ?
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -74,6 +76,11 @@ const MyOrders = () => {
                     </tbody>
                 </table>
             </div>
+            :
+            <div className='flex justify-center items-center h-screen font-extrabold mx-1'>
+                <h1 className='lg:text-4xl md:text-3xl text-xl text-center animate-fade-up animate-once animate-duration-[1500ms] animate-ease-linear uppercase font-bold  bg-gradient-to-r from-red-600  to-red-400 text-transparent bg-clip-text'>Currently You Don't Have <br /> Any Orders.</h1>
+            </div>
+            }
         </div>
     );
 };
