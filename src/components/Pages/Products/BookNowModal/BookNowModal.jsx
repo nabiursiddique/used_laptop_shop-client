@@ -14,9 +14,9 @@ const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
                     <div>
                         <input type="checkbox" id="book_now_modal" className="modal-toggle" />
                         <div className="modal">
-                            <div className="modal-box">
+                            <div className="modal-box lg:p-8 md:p-8 px-2">
                                 <form onSubmit={handleBooking}>
-                                    <div className=" flex  font-bold my-3">
+                                    <div className="flex font-bold my-3">
                                         <label className="text-base bg-gradient-to-r from-sky-700  to-sky-400 text-transparent bg-clip-text mr-1"> Product Id :</label>
                                         <input className='bg-transparent' disabled
                                             name='productId'
