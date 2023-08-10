@@ -54,7 +54,8 @@ const BlogPost = () => {
                         <span className="label-text">Script Of Your Blog</span>
                     </label>
                     <textarea {...register("blogContent", {
-                        required: "Product description is required."
+                        required: "Blog content is required.",
+                        minLength: { value: 20, message: "Blog content must be at least 20 letters" }
                     })} rows='7' className="textarea textarea-bordered w-full" placeholder="Write Your Blogs"></textarea>
                     {errors.blogContent && <p className='text-sm mt-2 text-red-500'>{errors.blogContent?.message}</p>}
                 </div>
