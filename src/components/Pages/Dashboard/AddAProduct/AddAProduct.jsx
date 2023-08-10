@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AddAProduct = () => {
     const { user } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors },reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate();
     const imageHostKey = import.meta.env.VITE_APP_imagebb_key;
 
@@ -20,58 +20,58 @@ const AddAProduct = () => {
 
     const handleAddProduct = (data) => {
         // Image hosting
-        const image =data.image[0];
+        const image = data.image[0];
         const formData = new FormData();
-        formData.append('image',image);
+        formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
-        fetch(url,{
-            method:'POST',
+        fetch(url, {
+            method: 'POST',
             body: formData
         })
-        .then((res) => res.json())
-        .then((imgData) =>{
-            if(imgData.success){
-                const { productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productDescription } = data;
+            .then((res) => res.json())
+            .then((imgData) => {
+                if (imgData.success) {
+                    const { productName, originalPrice, resalePrice, yearOfPurchase, category, condition, location, phoneNumber, productDescription } = data;
 
-                const product = {
-                    sellerName: user.displayName,
-                    sellerImage: user.photoURL,
-                    email: user.email,
-                    productName,
-                    originalPrice,
-                    resalePrice,
-                    yearOfPurchase,
-                    category,
-                    condition,
-                    location,
-                    phoneNumber,
-                    productImage:imgData.data.url,
-                    productDescription,
-                    date,
-                    time
-                }
-        
-                // Sending the product information to the database
-                fetch('https://used-laptop-shop-server.vercel.app/product', {
-                    method: "POST",
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify(product)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data) {
-                            toast.success("Product added successfully.");
-                            reset();
-                            navigate('/dashboard/myProduct');
-                        }
+                    const product = {
+                        sellerName: user.displayName,
+                        sellerImage: user.photoURL,
+                        email: user.email,
+                        productName,
+                        originalPrice,
+                        resalePrice,
+                        yearOfPurchase,
+                        category,
+                        condition,
+                        location,
+                        phoneNumber,
+                        productImage: imgData.data.url,
+                        productDescription,
+                        date,
+                        time
+                    }
+
+                    // Sending the product information to the database
+                    fetch('https://used-laptop-shop-server.vercel.app/product', {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(product)
                     })
-            }
-        })
-        .catch((error)=>{
-            console.log(error);
-        });
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data) {
+                                toast.success("Product added successfully.");
+                                reset();
+                                navigate('/dashboard/myProduct');
+                            }
+                        })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     return (

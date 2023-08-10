@@ -27,12 +27,12 @@ const Blog = () => {
             <div className='mx-10'>
                 {
                     blogContents.map((blogContent, ind) => <div key={ind} className="collapse collapse-arrow">
-                        <input type="radio" name="my-accordion-2" checked="checked" />
+                        <input type="radio" name="my-accordion" checked="checked" />
                         <div className="collapse-title text-xl text-blue-500 font-medium">
-                            {blogContent.question}
+                            {blogContent.title}
                         </div>
                         <div className="collapse-content">
-                            <p>{blogContent.answer}</p>
+                            <p>{blogContent.content}</p>
                         </div>
                     </div>
                     )

@@ -18,77 +18,82 @@ import MyBuyers from "../../components/Pages/Dashboard/MyBuyers/MyBuyers";
 import ErrorPage from "../../components/Shared/ErrorPage/ErrorPage";
 import Payment from "../../components/Pages/Dashboard/Payment/Payment";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BlogPost from "../../components/Pages/Dashboard/BlogPost/BlogPost";
 
 const router = createBrowserRouter([
     {
-        path:'/',
-        element:<MainLayout></MainLayout>,
-        errorElement:<ErrorPage></ErrorPage>,
-        children:[
+        path: '/',
+        element: <MainLayout></MainLayout>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
             {
-                path:'/',
-                element:<Home></Home>
+                path: '/',
+                element: <Home></Home>
             },
             {
-                path:'/blog',
-                element:<Blog></Blog>
+                path: '/blog',
+                element: <Blog></Blog>
             },
             {
-                path:'/signUp',
-                element:<SignUp></SignUp>
+                path: '/signUp',
+                element: <SignUp></SignUp>
             },
             {
-                path:'/signIn',
-                element:<SignIn></SignIn>
+                path: '/signIn',
+                element: <SignIn></SignIn>
             },
             {
-                path:'/products',
-                element:<Products></Products>
+                path: '/products',
+                element: <Products></Products>
             }
         ]
     },
     {
-        path:'/dashboard',
-        element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-        errorElement:<ErrorPage></ErrorPage>,
-        children:[
+        path: '/dashboard',
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
             {
-                path:'/dashboard/profile',
-                element:<Profile></Profile>
+                path: '/dashboard/profile',
+                element: <Profile></Profile>
             },
             {
-                path:'/dashboard/myProduct',
-                element:<MyProducts></MyProducts>
+                path: '/dashboard/myProduct',
+                element: <MyProducts></MyProducts>
             },
             {
-                path:'/dashboard/allUsers',
-                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+                path: '/dashboard/addAProduct',
+                element: <AddAProduct></AddAProduct>
             },
             {
-                path:'/dashboard/addAProduct',
-                element:<AddAProduct></AddAProduct>
+                path: '/dashboard/allUsers',
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
-                path:'/dashboard/allBuyers',
-                element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+                path: '/dashboard/allBuyers',
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
             {
-                path:'/dashboard/allSellers',
-                element:<AdminRoute><AllSellers></AllSellers></AdminRoute>
+                path: '/dashboard/allSellers',
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
-                path:'/dashboard/myOrders',
-                element:<MyOrders></MyOrders>
+                path: '/dashboard/blogPost',
+                element: <AdminRoute><BlogPost></BlogPost></AdminRoute>
             },
             {
-                path:'/dashboard/myBuyers',
-                element:<MyBuyers></MyBuyers>
+                path: '/dashboard/myOrders',
+                element: <MyOrders></MyOrders>
             },
             {
-                path:'/dashboard/payment/:id',
-                element:<Payment></Payment>,
-                loader: async({params})=> {
-                   return fetch(`https://used-laptop-shop-server.vercel.app/booking/${params.id}`)
+                path: '/dashboard/myBuyers',
+                element: <MyBuyers></MyBuyers>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: async ({ params }) => {
+                    return fetch(`https://used-laptop-shop-server.vercel.app/booking/${params.id}`)
                 }
             }
         ]
