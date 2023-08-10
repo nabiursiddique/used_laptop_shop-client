@@ -15,7 +15,7 @@ const AllBlogPosts = () => {
         queryKey: ['blogs'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/blogContents');
+                const res = await fetch('https://used-laptop-shop-server.vercel.app/blogContents');
                 const data = await res.json();
                 return data;
             }
@@ -27,7 +27,7 @@ const AllBlogPosts = () => {
 
     // For deleting the post
     const handleBlogPostDelete = (id) => {
-        fetch(`http://localhost:5000/blogContents/${id}`, {
+        fetch(`https://used-laptop-shop-server.vercel.app/blogContents/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

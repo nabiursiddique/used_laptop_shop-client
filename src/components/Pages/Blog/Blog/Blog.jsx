@@ -8,7 +8,7 @@ const Blog = () => {
         queryKey: ['blogContents'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/blogContents');
+                const res = await fetch('https://used-laptop-shop-server.vercel.app/blogContents');
                 const data = await res.json();
                 return data;
             }

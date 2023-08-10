@@ -14,7 +14,7 @@ const BlogPost = () => {
         }
 
         // Sending the blog content into the database.
-        fetch('http://localhost:5000/blogContents', {
+        fetch('https://used-laptop-shop-server.vercel.app/blogContents', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
