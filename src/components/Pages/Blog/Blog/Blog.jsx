@@ -1,7 +1,25 @@
 import React from 'react';
-import { blogContents } from '../BlogContents/BlogContents';
+import { useQuery } from 'react-query';
+import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
 
 const Blog = () => {
+    const { data: blogContents = [], isLoading } = useQuery({
+        queryKey: ['blogContents'],
+        queryFn: async () => {
+            try {
+                const res = await fetch('http://localhost:5000/blogContents');
+                const data = await res.json();
+                return data;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+    });
+
+    if (isLoading) {
+        return <LoadingAnimation></LoadingAnimation>
+    }
 
     return (
         <div className='mb-10 shadow-lg lg:mx-10 my-10 py-10 rounded-lg'>

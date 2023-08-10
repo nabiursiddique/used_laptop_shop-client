@@ -6,7 +6,7 @@ import blueTick from '../../../../assets/Icon/badge.png';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 
 const ProductsCard = ({ product, setBookProduct }) => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     // for scroll animation
     useEffect(() => {
         AOS.init();
@@ -23,7 +23,7 @@ const ProductsCard = ({ product, setBookProduct }) => {
                         verified ?
                             <div className="avatar ">
                                 <div className='absolute w-2/5 left-8 bottom-7'>
-                                <img src={blueTick} alt="" />
+                                    <img src={blueTick} alt="" />
                                 </div>
                                 <div className="w-12 rounded-full">
                                     <img src={sellerImage} />
@@ -45,15 +45,15 @@ const ProductsCard = ({ product, setBookProduct }) => {
                 <p className='text-sm'><span className='font-bold'>Purchase Year:</span> {yearOfPurchase}</p>
                 <p className='text-sm'><span className='font-bold'>Email:</span> {email}</p>
                 <p className='text-sm'><span className='font-bold'>Phone Number:</span> {phoneNumber}</p>
-                <h4><span className='font-bold'>Orginal Price:</span> {originalPrice}৳ </h4>
+                <h4><span className='font-bold'>Original Price:</span> {originalPrice}৳ </h4>
                 <h4><span className='font-bold'>Resale Price:</span> {resalePrice}৳</h4>
                 <div className="card-actions">
-                   { 
-                   user?.email === email ?
-                   <label onClick={() => setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full' disabled>Book Now</label>
-                   :
-                   <label onClick={() => setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Book Now</label>
-                   }
+                    {
+                        user?.email === email ?
+                            <label onClick={() => setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full' disabled>Book Now</label>
+                            :
+                            <label onClick={() => setBookProduct(product)} htmlFor="book_now_modal" className='btn bg-gradient-to-r from-sky-700  to-sky-500 text-white hover:from-blue-700 hover:to-blue-500 w-full'>Book Now</label>
+                    }
                 </div>
             </div>
         </div>
