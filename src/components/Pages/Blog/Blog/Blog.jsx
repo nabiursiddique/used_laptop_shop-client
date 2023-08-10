@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
 
 const Blog = () => {
+
     const { data: blogContents = [], isLoading } = useQuery({
         queryKey: ['blogContents'],
         queryFn: async () => {
@@ -28,7 +29,7 @@ const Blog = () => {
                 {
                     blogContents.map((blogContent, ind) =>
                         <div key={ind} className="collapse collapse-plus">
-                            <input type="radio" name="my-accordion" checked="checked" />
+                            <input type="radio" name="my-accordion" />
                             <div className="collapse-title text-xl text-blue-500 font-medium">
                                 {blogContent.title}
                             </div>
