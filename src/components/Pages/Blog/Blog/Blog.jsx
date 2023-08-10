@@ -26,15 +26,16 @@ const Blog = () => {
             <h2 className='text-center text-5xl my-8 bg-gradient-to-r from-blue-700  to-white text-transparent bg-clip-text font-extrabold'>OUR BLOGS</h2>
             <div className='mx-10'>
                 {
-                    blogContents.map((blogContent, ind) => <div key={ind} className="collapse collapse-arrow">
-                        <input type="radio" name="my-accordion" checked="checked" />
-                        <div className="collapse-title text-xl text-blue-500 font-medium">
-                            {blogContent.title}
+                    blogContents.map((blogContent, ind) =>
+                        <div key={ind} className="collapse collapse-plus">
+                            <input type="radio" name="my-accordion" checked="checked" />
+                            <div className="collapse-title text-xl text-blue-500 font-medium">
+                                {blogContent.title}
+                            </div>
+                            <div className="collapse-content">
+                                <p>{blogContent.content}</p>
+                            </div>
                         </div>
-                        <div className="collapse-content">
-                            <p>{blogContent.content}</p>
-                        </div>
-                    </div>
                     )
                 }
             </div>
