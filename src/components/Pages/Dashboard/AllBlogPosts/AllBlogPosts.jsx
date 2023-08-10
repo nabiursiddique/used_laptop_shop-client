@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
 import { toast } from 'react-hot-toast';
+import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
 
 const AllBlogPosts = () => {
+    const [deletingBlog, setDeletingBlog] = useState(null);
+
+    const closeModal = () => {
+        setDeletingBlog(null);
+    };
+
     const { data: blogs = [], isLoading, refetch } = useQuery({
         queryKey: ['blogs'],
         queryFn: async () => {
@@ -18,10 +25,6 @@ const AllBlogPosts = () => {
         }
     });
 
-    if (isLoading) {
-        return <LoadingAnimation></LoadingAnimation>
-    }
-
     // For deleting the post
     const handleBlogPostDelete = (id) => {
         fetch(`http://localhost:5000/blogContents/${id}`, {
@@ -30,13 +33,17 @@ const AllBlogPosts = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                toast.success('Blog Deleted Successfully')
+                toast.success('Blog Deleted Successfully');
+                refetch();
             })
             .catch((error) => {
                 console.log(error);
             })
     }
-    refetch();
+
+    if (isLoading) {
+        return <LoadingAnimation></LoadingAnimation>
+    }
 
     return (
         <div>
@@ -60,15 +67,28 @@ const AllBlogPosts = () => {
                                 <td>{blog.title}</td>
                                 <td>{blog.content.slice(0, 100)}...</td>
                                 <th>
-                                    <label htmlFor="confirmation_modal"
-                                        onClick={() => handleBlogPostDelete(blog._id)}
-                                        className="btn bg-red-400 text-white btn-sm hover:bg-red-500">X</label>
+                                    <label
+                                        htmlFor="confirmation_modal"
+                                        onClick={() => setDeletingBlog(blog)}
+                                        className="btn bg-red-400 text-white btn-sm hover:bg-red-500"
+                                    >X</label>
                                 </th>
                             </tr>)
                         }
                     </tbody>
                 </table>
             </div>
+            {
+                deletingBlog &&
+                <ConfirmationModal
+                    title={`Want to delete ${deletingBlog.title}?`}
+                    deleteFunction={handleBlogPostDelete}
+                    successButtonName={"Delete"}
+                    cancelButtonName={"Cancel"}
+                    closeModal={closeModal}
+                    deletingInfo={deletingBlog._id}
+                ></ConfirmationModal>
+            }
         </div>
     );
 };
