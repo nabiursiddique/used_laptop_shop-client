@@ -19,6 +19,7 @@ import ErrorPage from "../../components/Shared/ErrorPage/ErrorPage";
 import Payment from "../../components/Pages/Dashboard/Payment/Payment";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import BlogPost from "../../components/Pages/Dashboard/BlogPost/BlogPost";
+import AllBlogPosts from "../../components/Pages/Dashboard/AllBlogPosts/AllBlogPosts";
 
 const router = createBrowserRouter([
     {
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/blogPost',
                 element: <AdminRoute><BlogPost></BlogPost></AdminRoute>
+            },
+            {
+                path: '/dashboard/allBlogPosts',
+                element: <AdminRoute><AllBlogPosts></AllBlogPosts></AdminRoute>
             },
             {
                 path: '/dashboard/myOrders',
