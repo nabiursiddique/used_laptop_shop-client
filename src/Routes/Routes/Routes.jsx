@@ -20,6 +20,7 @@ import Payment from "../../components/Pages/Dashboard/Payment/Payment";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import BlogPost from "../../components/Pages/Dashboard/BlogPost/BlogPost";
 import AllBlogPosts from "../../components/Pages/Dashboard/AllBlogPosts/AllBlogPosts";
+import EditProduct from "../../components/Pages/Dashboard/EditProduct/EditProduct";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,13 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/myProduct',
                 element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/editProduct/:id',
+                element: <EditProduct></EditProduct>,
+                loader: async ({ params }) => {
+                    return fetch(`https://used-laptop-shop-server.vercel.app/products/${params.id}`)
+                }
             },
             {
                 path: '/dashboard/addAProduct',

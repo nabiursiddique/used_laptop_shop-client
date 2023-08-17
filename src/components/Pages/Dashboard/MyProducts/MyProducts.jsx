@@ -2,8 +2,10 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 import { useQuery } from 'react-query';
 import { toast } from 'react-hot-toast';
+import { FaEdit } from "react-icons/fa";
 import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
 import LoadingAnimation from '../../../LittleComponents/LoadingAnimation/LoadingAnimation';
+import { Link } from 'react-router-dom';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
@@ -63,6 +65,7 @@ const MyProducts = () => {
                                     <th>Price</th>
                                     <th>Condition</th>
                                     <th>Booking status</th>
+                                    <th>Edit</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -99,13 +102,29 @@ const MyProducts = () => {
                                             }
                                             {
                                                 product.booked ?
-                                                    <td>
-                                                        <label htmlFor="confirmation_modal" onClick={() => setDeletingProduct(product)} className="btn bg-red-400 text-white hover:bg-red-500 btn-sm" disabled>X</label>
-                                                    </td>
+                                                    <>
+                                                        <td>
+                                                            <button className='btn btn-ghost btn-xs hover:text-blue-300' disabled>
+                                                                <FaEdit className='text-xl text-gray' />
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <label htmlFor="confirmation_modal" onClick={() => setDeletingProduct(product)} className="btn bg-red-400 text-white hover:bg-red-500 btn-sm" disabled>X</label>
+                                                        </td>
+                                                    </>
                                                     :
-                                                    <td>
-                                                        <label htmlFor="confirmation_modal" onClick={() => setDeletingProduct(product)} className="btn bg-red-400 text-white hover:bg-red-500 btn-sm">X</label>
-                                                    </td>
+                                                    <>
+                                                        <td>
+                                                            <label className='btn btn-ghost btn-xs hover:text-blue-300'>
+                                                                <Link to={`/dashboard/editProduct/${product._id}`}>
+                                                                    <FaEdit className='text-xl' />
+                                                                </Link>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label htmlFor="confirmation_modal" onClick={() => setDeletingProduct(product)} className="btn bg-red-400 text-white hover:bg-red-500 btn-sm">X</label>
+                                                        </td>
+                                                    </>
                                             }
                                         </tr>)
                                 }
