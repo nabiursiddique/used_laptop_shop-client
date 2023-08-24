@@ -26,7 +26,7 @@ const Products = () => {
         }
     })
 
-    
+
 
     //booking modal close handle
     const closeModal = () => {
@@ -128,7 +128,7 @@ const Products = () => {
                                         product
                                         :
                                         product.productName.toLowerCase().includes(search)
-                                }).map((product, ind) => <ProductsCard
+                                }).toReversed().map((product, ind) => <ProductsCard
                                     key={ind}
                                     product={product}
                                     setBookProduct={setBookProduct}
