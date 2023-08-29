@@ -7,7 +7,7 @@ import { register } from 'swiper/element/bundle';
 function App() {
   register()
   return (
-    <div className="font-body">
+    <div className="max-w-[1440px] mx-auto font-body">
       <RouterProvider router={router}></RouterProvider>
       <Toaster></Toaster>
     </div>
