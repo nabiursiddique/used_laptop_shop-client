@@ -28,10 +28,10 @@ const Blog = () => {
             <div className='mx-10'>
                 {
                     blogContents.map((blogContent, ind) =>
-                        <div key={ind} className="collapse collapse-plus">
+                        <div key={ind} className="collapse collapse-open">
                             <input type="radio" name="my-accordion" />
                             <div className="collapse-title text-xl text-blue-500 font-medium">
-                                {blogContent.title}
+                                {ind + 1}. {blogContent.title}
                             </div>
                             <div className="collapse-content">
                                 <p>{blogContent.content}</p>
